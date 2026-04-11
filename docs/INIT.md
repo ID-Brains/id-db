@@ -275,11 +275,12 @@ The student authenticates with GitHub OAuth via the web form. The app requests t
 ```
 Student fills form
   └── Clicks "إرسال"
-        └── Frontend calls GitHub API (authenticated as student)
-              └── Creates a new branch: contrib/form/username-timestamp
-                    └── Commits the .md file (or raw uploaded binary) to that branch
-                          └── Opens a Pull Request with auto-generated title and description
-                                └── CI picks up from here (same as PR flow)
+        └── Frontend performs client-side validation (Zod)
+              └── Frontend calls GitHub API (authenticated as student)
+                    └── Creates a new branch: contrib/form/username-timestamp
+                          └── Commits the .md file (or raw uploaded binary) to that branch
+                                └── Opens a Pull Request with auto-generated title and description
+                                      └── CI picks up from here (same as PR flow)
 ```
 
 #### Hosted Form Location
@@ -294,11 +295,13 @@ Quiz and exam submissions follow the same contribution path as other Markdown co
 
 Contributors upload a Markdown file containing:
 - frontmatter metadata
-- a sequence of question blocks
+- a sequence of question blocks (parsed via `remark-directive`)
 - optional explanations
 - optional references to source material
 
-The schema is strict so that the renderer can grade deterministically, and maybe we provide them with a prompt to give to LLMs to extract and generate data in thier schema 'not needed and not recommended but the goal is to make things easier'
+The schema is strict so that the renderer can grade deterministically. Interaction (shuffling, grading, feedback) is handled by client-side Astro islands (React/Preact) to maintain a fast, stateful user experience.
+
+maybe we provide them with a prompt to give to LLMs to extract and generate data in thier schema 'not needed and not recommended but the goal is to make things easier'
 
 #### Rendering Model
 
@@ -339,7 +342,7 @@ All automation runs via GitHub Actions. No external CI service.
 
 | Workflow File | Trigger | Jobs |
 |---|---|---|
-| `validate.yml` | PR opened or updated | Schema validation Python 'different than buildtime astro check' |
+| `validate.yml` | PR opened or updated | Schema validation + Image optimization (JPEG/PNG compression) |
 | `extract.yml` | PR opened with binary file | textract, commit Markdown output |
 | `deploy.yml` | Push to `main` | `astro build`, deploy to GitHub Pages |
 | `label.yml` | PR opened | Auto-label by subject/year/type |
@@ -449,7 +452,7 @@ Starlight supports custom components. Giscus is injected by overriding Starlight
 
 Starlight ships with Pagefind integrated out of the box. No external service, no API key, works offline. The Pagefind index is built automatically during `astro build` and served as static files alongside the site.
 
-We aim to enhance it using our own index system using a mix of some scripts and github CIs.
+We leverage Pagefind's **metadata filtering** to allow students to filter results by `subject`, `prof`, `year`, and `term` directly in the UI. This provides a "faceted search" experience without a backend.
 
 Search indexes the Markdown body and frontmatter fields (`title`, `tags`, `prof`). Binary files (PDFs) are not directly indexed - only their extracted Markdown counterparts are.
 
