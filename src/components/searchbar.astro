@@ -1,0 +1,195 @@
+---
+
+---
+
+<section class="w-full" data-pagefind-search>
+	<form class="relative" role="search" aria-label="Search docs">
+		<span class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant" aria-hidden="true">⌕</span>
+		<input
+			type="search"
+			name="q"
+			autocomplete="off"
+			placeholder="Search notes, subjects, tags, and contributors..."
+			class="w-full rounded-xl border border-outline-variant/30 bg-surface-container-low px-11 py-3.5 text-sm text-on-surface outline-none transition-colors placeholder:text-on-surface-variant/75 focus:border-primary"
+			data-search-input
+		/>
+	</form>
+
+	<p class="mt-3 text-xs text-on-surface-variant" data-search-status>Type to search the knowledge base.</p>
+
+	<div class="mt-4 hidden" data-results-shell>
+		<ul class="space-y-3" data-results-list></ul>
+	</div>
+</section>
+
+<script>
+	// @ts-nocheck
+	const root = document.querySelector('[data-pagefind-search]');
+
+	if (root) {
+		const input = root.querySelector('[data-search-input]');
+		const status = root.querySelector('[data-search-status]');
+		const shell = root.querySelector('[data-results-shell]');
+		const list = root.querySelector('[data-results-list]');
+
+		if (!(input instanceof HTMLInputElement) || !(status instanceof HTMLElement) || !(shell instanceof HTMLElement) || !(list instanceof HTMLElement)) {
+			throw new Error('Searchbar component is missing required elements.');
+		}
+
+		let pagefind = null;
+		let pagefindLoader = null;
+		let debounceId;
+
+		const setStatus = (text) => {
+			status.textContent = text;
+		};
+
+		const clearResults = () => {
+			list.innerHTML = '';
+			shell.classList.add('hidden');
+		};
+
+		const renderResults = (items) => {
+			list.innerHTML = items
+				.map((item) => {
+					const title = item.meta.title || 'Untitled';
+					const excerpt = item.excerpt || '';
+
+					return `
+						<li>
+							<a class="block rounded-xl border border-outline-variant/20 bg-surface-container-lowest p-4 transition-colors hover:border-primary/40 hover:bg-surface-bright" href="${item.url}">
+								<h3 class="mb-1 text-base font-headline font-semibold tracking-tight text-primary">${title}</h3>
+								<p class="text-sm text-on-surface-variant leading-relaxed">${excerpt}</p>
+							</a>
+						</li>
+					`;
+				})
+				.join('');
+
+			shell.classList.remove('hidden');
+		};
+
+		const loadPagefind = async () => {
+			if (pagefind) {
+				return pagefind;
+			}
+
+			if (pagefindLoader) {
+				return pagefindLoader;
+			}
+
+			pagefindLoader = new Promise((resolve) => {
+				const existing = document.querySelector('script[data-pagefind-script]');
+				if (existing) {
+					const ready = window.pagefind;
+					if (ready) {
+						pagefind = ready;
+						resolve(pagefind);
+						return;
+					}
+				}
+
+				const script = document.createElement('script');
+				script.src = '/pagefind/pagefind.js';
+				script.async = true;
+				script.dataset.pagefindScript = 'true';
+				script.onload = () => {
+					pagefind = window.pagefind || null;
+					resolve(pagefind);
+				};
+				script.onerror = () => resolve(null);
+				document.head.appendChild(script);
+			});
+
+			const loaded = await pagefindLoader;
+			return loaded;
+		};
+
+		const searchLocalCards = (query) => {
+			const normalized = query.toLowerCase();
+			const cards = Array.from(document.querySelectorAll('[data-search-card]'));
+
+			return cards
+				.map((card) => {
+					if (!(card instanceof HTMLElement)) {
+						return null;
+					}
+
+					const title = card.dataset.searchTitle || '';
+					const excerpt = card.dataset.searchExcerpt || '';
+					const subject = card.dataset.searchSubject || '';
+					const prof = card.dataset.searchProf || '';
+					const contributor = card.dataset.searchContributor || '';
+					const tags = card.dataset.searchTags || '';
+					const terms = `${title} ${excerpt} ${subject} ${prof} ${contributor} ${tags}`.toLowerCase();
+
+					if (!terms.includes(normalized)) {
+						return null;
+					}
+
+					return {
+						meta: { title: title || 'Untitled' },
+						excerpt: excerpt || 'Matching document found in the current page.',
+						url: card.id ? `#${card.id}` : '#',
+					};
+				})
+				.filter(Boolean)
+				.slice(0, 8);
+		};
+
+		const searchDocs = async (query) => {
+			if (!query) {
+				clearResults();
+				setStatus('Type to search the knowledge base.');
+				return;
+			}
+
+			const engine = await loadPagefind();
+
+			if (!engine) {
+				const localMatches = searchLocalCards(query);
+
+				if (!localMatches.length) {
+					clearResults();
+					setStatus('No matches found.');
+					return;
+				}
+
+				renderResults(localMatches);
+				setStatus(`${localMatches.length} local result${localMatches.length === 1 ? '' : 's'} found.`);
+				return;
+			}
+
+			setStatus('Searching...');
+			const search = await engine.search(query, { excerptLength: 22 });
+
+			if (!search.results.length) {
+				clearResults();
+				setStatus('No matches found. Try a broader keyword.');
+				return;
+			}
+
+			const detailed = await Promise.all(search.results.slice(0, 8).map((result) => result.data()));
+
+			renderResults(detailed);
+			setStatus(`${search.results.length} result${search.results.length === 1 ? '' : 's'} found.`);
+		};
+
+		input.addEventListener('input', () => {
+			clearTimeout(debounceId);
+			debounceId = setTimeout(() => {
+				searchDocs(input.value.trim());
+			}, 200);
+		});
+
+		input.addEventListener('keydown', (event) => {
+			if (event.key !== 'Enter') {
+				return;
+			}
+
+			event.preventDefault();
+			clearTimeout(debounceId);
+			searchDocs(input.value.trim());
+		});
+	}
+</script>
