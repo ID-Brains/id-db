@@ -54,12 +54,14 @@
 				.map((item) => {
 					const title = item.meta.title || 'Untitled';
 					const excerpt = item.excerpt || '';
+					const prof = item.meta.prof ? `Professor ${item.meta.prof}` : '';
 
 					return `
 						<li>
 							<a class="block rounded-xl border border-outline-variant/20 bg-surface-container-lowest p-4 transition-colors hover:border-primary/40 hover:bg-surface-bright" href="${item.url}">
 								<h3 class="mb-1 text-base font-headline font-semibold tracking-tight text-primary">${title}</h3>
 								<p class="text-sm text-on-surface-variant leading-relaxed">${excerpt}</p>
+								${prof ? `<p class="mt-2 text-xs text-on-surface-variant">By ${prof}</p>` : ''}
 							</a>
 						</li>
 					`;
@@ -128,7 +130,10 @@
 					}
 
 					return {
-						meta: { title: title || 'Untitled' },
+						meta: {
+							title: title || 'Untitled',
+							prof,
+						},
 						excerpt: excerpt || 'Matching document found in the current page.',
 						url: card.id ? `#${card.id}` : '#',
 					};
