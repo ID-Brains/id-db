@@ -6,7 +6,7 @@ This document provides details on the core technical tools that power the **Coll
 
 We use **Pagefind** to provide high-performance search without a backend.
 - **How it works:** Pagefind generates a search index during the build process. This index is then served as static files.
-- **Faceted Search:** We use metadata fields (e.g., `subject`, `prof`, `year`, `term`) to allow users to filter search results directly in the UI.
+- **Faceted Search:** We use metadata fields (e.g., `subject`, `prof`, `level`, `term`) to allow users to filter search results directly in the UI.
 - **Benefits:** No API keys, fully offline-ready, and zero hosting costs.
 
 ## 2. Comments (Giscus)

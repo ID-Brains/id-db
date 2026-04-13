@@ -10,7 +10,7 @@ This document is a living draft of our future plans for the **College Knowledge 
 
 ### Phase 2: Community & Growth
 - [ ] Recruits [Subject Leads](./GOVERNANCE.md#subject-leads) for key subjects.
-- [ ] Launch with a core set of notes and summaries for Year 2.
+- [ ] Launch with a core set of notes and summaries for Level 2.
 - [ ] Enhance the [Quiz System](./CONTENT_GUIDELINES.md#3-quizzes-and-exams) with better feedback and explanations.
 
 ### Phase 3: Long-term Sustainability

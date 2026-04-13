@@ -12,18 +12,18 @@ class Schema(BaseModel):
     date: date
     type: Literal["summary", "quiz", "notes", "reference"]
     subject: str
-    year: int
+    level: int
     term: int
     prof: str
     contributor: str
     tags: list[str]
     language: Literal["ar", "en"]
 
-    @field_validator("year")
+    @field_validator("level")
     @classmethod
-    def year_check(cls, v):
+    def level_check(cls, v):
         if not (1 <= v <= 5):
-            raise ValueError("year must be between 1 and 5")
+            raise ValueError("level must be between 1 and 5")
         return v
 
     @field_validator("term")

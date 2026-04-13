@@ -1,6 +1,6 @@
 # Contributing to the Knowledge Base
 
-We are excited to have people contribute contribute! Whether you're a first-year student sharing your first set of notes or a veteran maintainer, your input helps build a better resource for everyone as our main objective is to share opensource mentality.
+We are excited to have people contribute contribute! Whether you're a first-level student sharing your first set of notes or a veteran maintainer, your input helps build a better resource for everyone as our main objective is to share opensource mentality.
 
 ## 🚀 Ways to Contribute
 
@@ -23,7 +23,7 @@ Best for those who want more control over their contributions.
 
 ## 📝 Pull Request Guidelines
 To ensure a smooth review process, please follow these conventions:
-- **PR Title:** `[YEAR-TERM] Subject: Short Description` (e.g., `[Y3-T1] Microprocessors: Lecture 01 Summary`).
+- **PR Title:** `[level-TERM] Subject: Short Description` (e.g., `[L3-T1] Microprocessors: Lecture 01 Summary`).
 - **Validation:** Ensure the automated checks (CI) pass. If they fail, review the error logs or ask a maintainer for help.
 
 ## 🎓 Contribution Values

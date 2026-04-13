@@ -35,8 +35,8 @@ We use a `CODEOWNERS` file to automatically request reviews from the correct Sub
 
 ```text
 # Example CODEOWNERS
-/src/content/docs/year-3/term-1/microprocessors/  @subject-lead-microprocessors
-/src/content/docs/year-2/term-2/algorithms/       @subject-lead-algorithms
+/src/content/docs/level-3/term-1/microprocessors/  @subject-lead-microprocessors
+/src/content/docs/level-2/term-2/algorithms/       @subject-lead-algorithms
 ```
 
 ## References
