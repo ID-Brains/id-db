@@ -54,18 +54,125 @@
 	--color-inverse-surface: #2e3132;
 }
 
+:root {
+	--sl-font: var(--font-body);
+	--sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
 html {
-	font-size: var(--app-font-size, 16px);
+	font-size: var(--app-font-size, 16px) !important;
 	font-family: var(--font-body);
 }
 
 body {
 	background: var(--color-surface);
 	color: var(--color-on-surface);
-	line-height: var(--app-line-height, 1.5);
+	line-height: var(--app-line-height, 1.5) !important;
 }
 
-html.dark {
+body[data-app-root] :is(p, li, blockquote) {
+	line-height: var(--app-line-height, 1.6) !important;
+}
+
+body[data-app-root] :is(h1, h2, h3, h4, h5, h6) {
+	line-height: var(--app-line-height-headings, 1.2) !important;
+}
+
+.sl-markdown-content {
+	font-family: var(--font-body);
+}
+
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
+	font-family: var(--font-headline);
+	letter-spacing: -0.03em;
+}
+
+.sl-markdown-content,
+.sl-markdown-content p,
+.sl-markdown-content li,
+.sl-markdown-content blockquote {
+	line-height: var(--app-line-height, 1.5) !important;
+}
+
+.sidebar-pane {
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-surface-container-lowest) 96%, white 4%),
+		var(--color-surface)
+	) !important;
+	border-inline-end: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent) !important;
+	backdrop-filter: blur(12px);
+}
+
+.sidebar-content {
+	padding-top: 1.25rem !important;
+	gap: 1.15rem !important;
+	font-family: var(--font-body);
+}
+
+.sidebar-pane :is(a, summary) {
+	font-family: var(--font-body);
+	border-radius: 0.9rem;
+	transition:
+		background-color 160ms ease,
+		color 160ms ease,
+		transform 160ms ease,
+		box-shadow 160ms ease;
+}
+
+.sidebar-pane a {
+	padding-block: 0.6rem !important;
+	padding-inline: 0.9rem !important;
+	color: var(--color-on-surface-variant) !important;
+	background: transparent;
+}
+
+.sidebar-pane a:hover {
+	background: color-mix(in srgb, var(--color-secondary-container) 55%, transparent);
+	color: var(--color-on-surface) !important;
+	transform: translateX(2px);
+}
+
+.sidebar-pane [aria-current="page"] {
+	background: linear-gradient(135deg, var(--color-primary), var(--color-primary-container)) !important;
+	color: var(--color-on-primary) !important;
+	box-shadow: 0 10px 24px color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+.sidebar-pane summary {
+	padding-block: 0.65rem !important;
+	padding-inline: 0.9rem !important;
+	color: var(--color-on-surface) !important;
+	font-family: var(--font-label);
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	font-size: 0.72rem;
+	font-weight: 700;
+}
+
+.sidebar-pane .large {
+	font-family: var(--font-headline);
+	font-size: 0.98rem !important;
+	font-weight: 700;
+	text-transform: none;
+	letter-spacing: -0.02em;
+}
+
+.sidebar-pane ul ul li {
+	border-inline-start-color: color-mix(in srgb, var(--color-outline-variant) 65%, transparent);
+}
+
+.sidebar-pane .caret {
+	color: var(--color-primary);
+}
+
+:root[data-theme="light"] {
+	--sl-color-bg: var(--color-surface);
+	--sl-color-bg-nav: var(--color-surface-container-lowest);
+	--sl-color-bg-sidebar: var(--color-surface-container-lowest);
+}
+
+:root[data-theme="dark"] {
 	--color-surface: #111416;
 	--color-background: #111416;
 	--color-on-surface: #e6e8ea;
@@ -85,4 +192,19 @@ html.dark {
 	--color-on-secondary-container: #cfe6f2;
 	--color-inverse-surface: #e6e8ea;
 	--color-inverse-on-surface: #1b2024;
+
+	--sl-color-bg: var(--color-surface);
+	--sl-color-bg-nav: var(--color-surface-container-low);
+	--sl-color-bg-sidebar: var(--color-surface-container-lowest);
+	--sl-color-bg-inline-code: var(--color-surface-container-high);
+	--sl-color-hairline: color-mix(in srgb, var(--color-outline-variant) 70%, transparent);
+	--sl-color-hairline-light: color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
+}
+
+:root[data-theme="dark"] .sidebar-pane {
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-surface-container-lowest) 94%, black 6%),
+		var(--color-surface)
+	) !important;
 }

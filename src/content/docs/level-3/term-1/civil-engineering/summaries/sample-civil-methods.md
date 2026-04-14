@@ -3,7 +3,7 @@ title: testing data 1
 date: 2026-04-10
 description: Experimental entry for testing list rendering in docs page.
 subject: Civil Engineering
-year: "3"
+level: "3"
 term: 1
 prof: Dr. Samir Nabil
 contributor: QA Seed

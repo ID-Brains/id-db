@@ -1,5 +1,6 @@
 import { defineCollection } from "astro:content";
-import { glob } from "astro/loaders";
+import { docsLoader } from "@astrojs/starlight/loaders";
+import { docsSchema } from "@astrojs/starlight/schema";
 import { z } from "zod";
 
 const FormattSchema = z.object({
@@ -7,7 +8,7 @@ const FormattSchema = z.object({
   date: z.coerce.date(),
   description: z.string(),
   subject: z.string(),
-  year: z.enum(["1", "2", "3", "4", "5"]),
+  level: z.enum(["1", "2", "3", "4", "5"]),
   term: z.number().min(1).max(2),
   prof: z.string(),
   contributor: z.string(),
@@ -18,8 +19,8 @@ const FormattSchema = z.object({
 export type Formatt = z.infer<typeof FormattSchema>;
 
 const docs = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/docs" }),
-  schema: FormattSchema,
+  loader: docsLoader(),
+  schema: docsSchema({ extend: FormattSchema }),
 });
 
 export const collections = {
