@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 
 const docs = (await getCollection("docs"))
-  .filter((doc) => doc.id !== "docs")
+  .filter((doc) => doc.id !== "docs" && doc.id !== "index")
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 type DocEntry = (typeof docs)[number];

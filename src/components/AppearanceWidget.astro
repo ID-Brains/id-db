@@ -71,26 +71,35 @@
 </div>
 
 <script>
-  // Script logic handling state and layout
-  const STORAGE_KEYS = { theme: 'theme', size: 'text-size', spacing: 'line-spacing' };
-  
-  const SIZE_MAP = { small: '14px', medium: '16px', large: '19px' };
-  const LINE_MAP = { tight: '1.35', medium: '1.6', wide: '1.9' };
-  const HEAD_MAP = { tight: '1.1', medium: '1.2', wide: '1.25' };
+  import {
+    STORAGE_KEYS,
+    THEME_OPTIONS,
+    SIZE_OPTIONS,
+    SPACING_OPTIONS,
+    applyStoredAppearance,
+    applyThemePreference,
+    applySizePreference,
+    applySpacingPreference,
+    getStoredAppearanceSelection,
+    type ThemeOption,
+    type SizeOption,
+    type SpacingOption,
+  } from "../scripts/appearance";
 
   function initAppearanceWidget() {
-    const root = document.querySelector('[data-appearance-widget]');
-    if (!root || root.hasAttribute('data-initialized')) return;
-    root.setAttribute('data-initialized', 'true');
+    const root = document.querySelector<HTMLElement>('[data-appearance-widget]');
+    if (!root || root.dataset.initialized === 'true') return;
 
-    const fab = document.getElementById('appearance-fab');
-    const closeBtn = document.getElementById('appearance-close');
-    const panel = document.getElementById('appearance-panel');
+    const fab = root.querySelector<HTMLButtonElement>('#appearance-fab');
+    const closeBtn = root.querySelector<HTMLButtonElement>('#appearance-close');
+    const panel = root.querySelector<HTMLElement>('#appearance-panel');
+    if (!fab || !closeBtn || !panel) return;
+
+    root.dataset.initialized = 'true';
     let isOpen = false;
 
     // Open/Close logic
     const togglePanel = () => {
-      if(!panel) return;
       isOpen = !isOpen;
       
       if (isOpen) {
@@ -109,8 +118,8 @@
       }
     };
 
-    fab?.addEventListener('click', togglePanel);
-    closeBtn?.addEventListener('click', togglePanel);
+    fab.addEventListener('click', togglePanel);
+    closeBtn.addEventListener('click', togglePanel);
 
     // Close on click outside
     document.addEventListener('click', (e) => {
@@ -124,41 +133,9 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen) {
         togglePanel();
-        fab?.focus();
+        fab.focus();
       }
     });
-
-    // Handle Buttons
-    const html = document.documentElement;
-    
-    function applyTheme(t) {
-      if(!t) return;
-      const isDark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      html.dataset.theme = t === 'system' ? (isDark ? 'dark' : 'light') : t;
-      html.classList.toggle('dark', isDark);
-      
-      if(t === 'system') localStorage.removeItem(STORAGE_KEYS.theme);
-      else localStorage.setItem(STORAGE_KEYS.theme, t);
-      
-      updateActive('data-theme-btn', t);
-    }
-
-    function applySize(s) {
-      if(!s || !SIZE_MAP[s]) return;
-      html.style.fontSize = SIZE_MAP[s];
-      html.style.setProperty('--app-font-size', SIZE_MAP[s]);
-      localStorage.setItem(STORAGE_KEYS.size, s);
-      updateActive('data-size-btn', s);
-    }
-
-    function applySpacing(s) {
-      if(!s || !LINE_MAP[s]) return;
-      html.style.lineHeight = LINE_MAP[s];
-      html.style.setProperty('--app-line-height', LINE_MAP[s]);
-      html.style.setProperty('--app-line-height-headings', HEAD_MAP[s]);
-      localStorage.setItem(STORAGE_KEYS.spacing, s);
-      updateActive('data-space-btn', s);
-    }
 
     function updateActive(attr, val) {
       root.querySelectorAll(`[${attr}]`).forEach(btn => {
@@ -170,39 +147,56 @@
       });
     }
 
+    function applyOption<T extends string>(
+      button: Element | null,
+      options: readonly T[],
+      attr: string,
+      apply: (value: T) => void,
+    ) {
+      if (!button) return;
+      const value = button.getAttribute(attr);
+      if (!value || !options.includes(value as T)) return;
+
+      apply(value as T);
+      updateActive(attr, value);
+    }
+
     // Attach events using event delegation for efficiency
     root.addEventListener('click', (e) => {
       const target = e.target;
       if (!(target instanceof Element)) return;
       
       const themeBtn = target.closest('[data-theme-btn]');
-      if (themeBtn) applyTheme(themeBtn.getAttribute('data-theme-btn'));
+      applyOption<ThemeOption>(themeBtn, THEME_OPTIONS, 'data-theme-btn', applyThemePreference);
       
       const sizeBtn = target.closest('[data-size-btn]');
-      if (sizeBtn) applySize(sizeBtn.getAttribute('data-size-btn'));
+      applyOption<SizeOption>(sizeBtn, SIZE_OPTIONS, 'data-size-btn', applySizePreference);
       
       const spaceBtn = target.closest('[data-space-btn]');
-      if (spaceBtn) applySpacing(spaceBtn.getAttribute('data-space-btn'));
+      applyOption<SpacingOption>(spaceBtn, SPACING_OPTIONS, 'data-space-btn', applySpacingPreference);
     });
 
     // Init matching OS theme changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
       if(localStorage.getItem(STORAGE_KEYS.theme) === null) {
-        applyTheme('system');
+        applyStoredAppearance();
+        updateActive('data-theme-btn', 'system');
       }
     });
 
     // Read stored preferences to reflect correctly in the widget
-    const storedTheme = localStorage.getItem(STORAGE_KEYS.theme) || 'system';
-    const storedSize = localStorage.getItem(STORAGE_KEYS.size) || 'medium';
-    const storedSpacing = localStorage.getItem(STORAGE_KEYS.spacing) || 'medium';
+    const storedPreferences = getStoredAppearanceSelection();
     
-    updateActive('data-theme-btn', storedTheme);
-    updateActive('data-size-btn', storedSize);
-    updateActive('data-space-btn', storedSpacing);
+    updateActive('data-theme-btn', storedPreferences.theme);
+    updateActive('data-size-btn', storedPreferences.size);
+    updateActive('data-space-btn', storedPreferences.spacing);
   }
 
   // Initialize
+  applyStoredAppearance();
   initAppearanceWidget();
-  document.addEventListener('astro:page-load', initAppearanceWidget);
+  document.addEventListener('astro:page-load', () => {
+    applyStoredAppearance();
+    initAppearanceWidget();
+  });
 </script>
