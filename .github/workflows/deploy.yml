@@ -26,8 +26,8 @@ jobs:
             ~/.npm
             node_modules
           key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
-          restore-keys:
-            - ${{ runner.os }}-npm-
+          restore-keys: |
+            ${{ runner.os }}-npm-
 
       - name: Install, build, and generate Pagefind index
         uses: withastro/action@v6
