@@ -1,0 +1,202 @@
+---
+---
+<div class="fixed bottom-6 right-6 z-[100] font-body" data-appearance-widget>
+  <!-- Popover Panel -->
+  <div id="appearance-panel" class="hidden absolute bottom-[calc(100%+1rem)] right-0 w-[320px] bg-surface-container-lowest/85 backdrop-blur-3xl border border-outline-variant/30 rounded-3xl p-6 shadow-[0_32px_64px_rgba(0,0,0,0.12)] transform origin-bottom-right transition-all duration-300 scale-95 opacity-0">
+    
+    <!-- Header -->
+    <div class="mb-6 flex justify-between items-center">
+      <h3 class="font-headline font-extrabold text-xl text-on-surface tracking-tight">Appearance</h3>
+      <button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-colors group" id="appearance-close" aria-label="Close Settings">
+        <span class="material-symbols-outlined text-[1.2rem] group-hover:rotate-90 transition-transform duration-300">close</span>
+      </button>
+    </div>
+
+    <!-- Theme -->
+    <div class="mb-6">
+      <p class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant/80 font-bold mb-3 pl-1">Color Theme</p>
+      <div class="bg-surface-container-low p-1 rounded-2xl flex gap-1 relative border border-outline-variant/20">
+        <button class="flex-1 py-2.5 rounded-xl text-on-surface text-sm font-semibold transition-all duration-200 z-10 data-[active=true]:bg-surface-container-lowest data-[active=true]:shadow-sm data-[active=true]:text-primary" data-theme-btn="light">Light</button>
+        <button class="flex-1 py-2.5 rounded-xl text-on-surface text-sm font-semibold transition-all duration-200 z-10 data-[active=true]:bg-surface-container-lowest data-[active=true]:shadow-sm data-[active=true]:text-primary" data-theme-btn="dark">Dark</button>
+        <button class="flex-1 py-2.5 rounded-xl text-on-surface text-sm font-semibold transition-all duration-200 z-10 data-[active=true]:bg-surface-container-lowest data-[active=true]:shadow-sm data-[active=true]:text-primary" data-theme-btn="system">Auto</button>
+      </div>
+    </div>
+
+    <!-- Text Size -->
+    <div class="mb-6">
+      <p class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant/80 font-bold mb-3 pl-1">Text Size</p>
+      <div class="flex gap-2">
+        <button class="flex-1 py-3 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-on-surface flex flex-col items-center justify-center gap-1 hover:border-primary/30 hover:bg-surface transition-all data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-size-btn="small">
+          <span class="text-sm font-bold leading-none">A</span>
+        </button>
+        <button class="flex-1 py-3 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-on-surface flex flex-col items-center justify-center gap-1 hover:border-primary/30 hover:bg-surface transition-all data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-size-btn="medium">
+          <span class="text-lg font-bold leading-none">A</span>
+        </button>
+        <button class="flex-1 py-3 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-on-surface flex flex-col items-center justify-center gap-1 hover:border-primary/30 hover:bg-surface transition-all data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-size-btn="large">
+          <span class="text-2xl font-bold leading-none">A</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Spacing -->
+    <div>
+      <p class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant/80 font-bold mb-3 pl-1">Line Spacing</p>
+      <div class="flex gap-2">
+        <button class="flex-1 h-12 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-current flex flex-col items-center justify-center gap-[3px] transform transition-all hover:border-primary/30 hover:bg-surface data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-space-btn="tight">
+          <div class="w-5 h-[2.5px] bg-current rounded-full opacity-70"></div>
+          <div class="w-5 h-[2.5px] bg-current rounded-full opacity-70"></div>
+          <div class="w-5 h-[2.5px] bg-current rounded-full opacity-70"></div>
+        </button>
+        <button class="flex-1 h-12 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-current flex flex-col items-center justify-center gap-[5px] transform transition-all hover:border-primary/30 hover:bg-surface data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-space-btn="medium">
+          <div class="w-5 h-[2.5px] bg-current rounded-full opacity-80"></div>
+          <div class="w-5 h-[2.5px] bg-current rounded-full opacity-80"></div>
+          <div class="w-5 h-[2.5px] bg-current rounded-full opacity-80"></div>
+        </button>
+        <button class="flex-1 h-12 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-current flex flex-col items-center justify-center gap-[7px] transform transition-all hover:border-primary/30 hover:bg-surface data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-space-btn="wide">
+          <div class="w-5 h-[2.5px] bg-current rounded-full opacity-100"></div>
+          <div class="w-5 h-[2.5px] bg-current rounded-full opacity-100"></div>
+          <div class="w-5 h-[2.5px] bg-current rounded-full opacity-100"></div>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAB -->
+  <button id="appearance-fab" class="w-[3.75rem] h-[3.75rem] rounded-full bg-[linear-gradient(135deg,var(--color-primary),var(--color-primary-container))] text-on-primary shadow-[0_8px_32px_rgba(0,66,94,0.35)] flex items-center justify-center hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,66,94,0.45)] active:scale-95 transition-all outline-none focus-visible:ring-4 focus-visible:ring-primary/40 relative overflow-hidden group" aria-label="Toggle Appearance Settings">
+    <!-- Inner subtle glow effect -->
+    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    <span class="material-symbols-outlined text-[1.6rem] transition-transform duration-300 group-hover:rotate-[-10deg]">tune</span>
+  </button>
+</div>
+
+<script>
+  import {
+    STORAGE_KEYS,
+    THEME_OPTIONS,
+    SIZE_OPTIONS,
+    SPACING_OPTIONS,
+    applyStoredAppearance,
+    applyThemePreference,
+    applySizePreference,
+    applySpacingPreference,
+    getStoredAppearanceSelection,
+    type ThemeOption,
+    type SizeOption,
+    type SpacingOption,
+  } from "../scripts/appearance";
+
+  function initAppearanceWidget() {
+    const root = document.querySelector<HTMLElement>('[data-appearance-widget]');
+    if (!root || root.dataset.initialized === 'true') return;
+
+    const fab = root.querySelector<HTMLButtonElement>('#appearance-fab');
+    const closeBtn = root.querySelector<HTMLButtonElement>('#appearance-close');
+    const panel = root.querySelector<HTMLElement>('#appearance-panel');
+    if (!fab || !closeBtn || !panel) return;
+
+    root.dataset.initialized = 'true';
+    let isOpen = false;
+
+    // Open/Close logic
+    const togglePanel = () => {
+      isOpen = !isOpen;
+      
+      if (isOpen) {
+        panel.classList.remove('hidden');
+        // Add a slight delay so display:block paints before removing opacity
+        requestAnimationFrame(() => {
+          panel.classList.remove('scale-95', 'opacity-0');
+          panel.classList.add('scale-100', 'opacity-100');
+        });
+      } else {
+        panel.classList.remove('scale-100', 'opacity-100');
+        panel.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          if (!isOpen) panel.classList.add('hidden');
+        }, 300);
+      }
+    };
+
+    fab.addEventListener('click', togglePanel);
+    closeBtn.addEventListener('click', togglePanel);
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (isOpen && target instanceof Node && !root.contains(target)) {
+        togglePanel();
+      }
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        togglePanel();
+        fab.focus();
+      }
+    });
+
+    function updateActive(attr, val) {
+      root.querySelectorAll(`[${attr}]`).forEach(btn => {
+        if(btn.getAttribute(attr) === val) {
+          btn.setAttribute('data-active', 'true');
+        } else {
+          btn.removeAttribute('data-active');
+        }
+      });
+    }
+
+    function applyOption<T extends string>(
+      button: Element | null,
+      options: readonly T[],
+      attr: string,
+      apply: (value: T) => void,
+    ) {
+      if (!button) return;
+      const value = button.getAttribute(attr);
+      if (!value || !options.includes(value as T)) return;
+
+      apply(value as T);
+      updateActive(attr, value);
+    }
+
+    // Attach events using event delegation for efficiency
+    root.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+      
+      const themeBtn = target.closest('[data-theme-btn]');
+      applyOption<ThemeOption>(themeBtn, THEME_OPTIONS, 'data-theme-btn', applyThemePreference);
+      
+      const sizeBtn = target.closest('[data-size-btn]');
+      applyOption<SizeOption>(sizeBtn, SIZE_OPTIONS, 'data-size-btn', applySizePreference);
+      
+      const spaceBtn = target.closest('[data-space-btn]');
+      applyOption<SpacingOption>(spaceBtn, SPACING_OPTIONS, 'data-space-btn', applySpacingPreference);
+    });
+
+    // Init matching OS theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if(localStorage.getItem(STORAGE_KEYS.theme) === null) {
+        applyStoredAppearance();
+        updateActive('data-theme-btn', 'system');
+      }
+    });
+
+    // Read stored preferences to reflect correctly in the widget
+    const storedPreferences = getStoredAppearanceSelection();
+    
+    updateActive('data-theme-btn', storedPreferences.theme);
+    updateActive('data-size-btn', storedPreferences.size);
+    updateActive('data-space-btn', storedPreferences.spacing);
+  }
+
+  // Initialize
+  applyStoredAppearance();
+  initAppearanceWidget();
+  document.addEventListener('astro:page-load', () => {
+    applyStoredAppearance();
+    initAppearanceWidget();
+  });
+</script>

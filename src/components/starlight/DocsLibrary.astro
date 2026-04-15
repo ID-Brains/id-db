@@ -1,0 +1,328 @@
+---
+import { getCollection } from "astro:content";
+
+const docs = (await getCollection("docs"))
+  .filter((doc) => doc.id !== "docs" && doc.id !== "index" && doc.id !== "404")
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+type DocEntry = (typeof docs)[number];
+
+const toDocHref = (doc: DocEntry) => `/${doc.id}/`;
+
+const subjectsCount = new Set(docs.map((doc) => doc.data.subject)).size;
+
+const docsByLevel = docs.reduce<Map<string, Map<number, DocEntry[]>>>((map, doc) => {
+  const levelKey = doc.data.level;
+  const termKey = doc.data.term;
+  const levelBucket = map.get(levelKey);
+
+  if (!levelBucket) {
+    map.set(levelKey, new Map([[termKey, [doc]]]));
+    return map;
+  }
+
+  const termBucket = levelBucket.get(termKey);
+  if (termBucket) {
+    termBucket.push(doc);
+  } else {
+    levelBucket.set(termKey, [doc]);
+  }
+
+  return map;
+}, new Map());
+
+const levelLadders = Array.from(docsByLevel.entries())
+  .sort((a, b) => Number(a[0]) - Number(b[0]))
+  .map(([level, terms]) => {
+    const orderedTerms = Array.from(terms.entries())
+      .sort((a, b) => a[0] - b[0])
+      .map(([term, termDocs]) => ({ term, docs: termDocs }));
+
+    const totalDocs = orderedTerms.reduce((sum, item) => sum + item.docs.length, 0);
+    return { level, terms: orderedTerms, totalDocs };
+  });
+---
+
+<div class="docs-library not-content">
+  <!-- Hero / stats banner -->
+  <section class="docs-hero">
+    <p class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-5 opacity-80">Knowledge Base Library</p>
+    <h1 class="font-headline text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-on-surface mb-6 leading-[0.95]">All Docs</h1>
+    <p class="text-on-surface-variant text-base sm:text-lg max-w-3xl leading-relaxed">
+      Browse student-contributed lecture notes, summaries, and practical reports by subject, level, and term.
+    </p>
+
+    <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-6 sm:gap-8">
+      <div class="flex items-center gap-3">
+        <svg class="w-5 h-5 text-primary" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+        <div>
+          <p class="font-headline text-2xl font-bold leading-none">{docs.length}</p>
+          <p class="font-label text-[11px] uppercase tracking-wider text-on-surface-variant">Documents</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-5 h-5 text-primary" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" /></svg>
+        <div>
+          <p class="font-headline text-2xl font-bold leading-none">{subjectsCount}</p>
+          <p class="font-label text-[11px] uppercase tracking-wider text-on-surface-variant">Subjects</p>
+        </div>
+      </div>
+    </div>
+
+    <nav class="mt-8 flex flex-wrap gap-2.5" aria-label="Browse docs by level">
+      {levelLadders.map((levelBlock) => (
+        <a href={`#level-${levelBlock.level}`} class="docs-level-chip">Level {levelBlock.level}</a>
+      ))}
+    </nav>
+  </section>
+
+  <!-- Level → Term → Cards -->
+  <section class="docs-body">
+    {docs.length === 0 ? (
+      <section class="empty-state">
+        <h2 class="font-headline text-2xl sm:text-3xl font-bold text-primary mb-3">No docs yet</h2>
+        <p class="text-on-surface-variant max-w-xl">
+          Once content is added to the docs collection, it will appear here grouped by level and term.
+        </p>
+      </section>
+    ) : (
+    <div class="space-y-8 sm:space-y-10">
+      {levelLadders.map((levelBlock) => (
+        <section class="level-block" id={`level-${levelBlock.level}`}>
+          <div class="mb-4 sm:mb-5 flex items-end justify-between gap-4">
+            <h2 class="font-headline text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-primary uppercase">Level {levelBlock.level}</h2>
+            <p class="font-label text-xs uppercase tracking-[0.16em] text-on-surface-variant whitespace-nowrap">{levelBlock.totalDocs} docs</p>
+          </div>
+
+          <div class="terms-grid">
+            {levelBlock.terms.map((termBlock) => (
+              <section class="term-block">
+                <div class="mb-3 flex items-center justify-between gap-3">
+                  <h3 class="font-label text-sm uppercase tracking-[0.2em] text-on-surface-variant">Term {termBlock.term}</h3>
+                  <span class="text-xs text-on-surface-variant uppercase tracking-wider">{termBlock.docs.length} docs</span>
+                </div>
+
+                <div class="cards-row">
+                  {termBlock.docs.map((doc: DocEntry) => (
+                    <a
+                      href={toDocHref(doc)}
+                      class="doc-card group"
+                      id={`doc-${doc.id.replace(/[^a-zA-Z0-9-]/g, "-")}`}
+                      data-search-card
+                      data-search-title={doc.data.title}
+                      data-search-excerpt={doc.data.description}
+                      data-search-subject={doc.data.subject}
+                      data-search-prof={doc.data.prof}
+                      data-search-contributor={doc.data.contributor}
+                      data-search-tags={doc.data.tags.join(" ")}
+                    >
+                      <article class="doc-card-inner">
+                        <div class="mb-3 sm:mb-4 flex items-center justify-between gap-3 flex-wrap">
+                          <span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-label font-bold uppercase tracking-wide">
+                            {doc.data.subject}
+                          </span>
+                          <span class="text-xs text-on-surface-variant font-label uppercase tracking-wider">L{doc.data.level} | T{doc.data.term}</span>
+                        </div>
+
+                        <h4 class="font-headline text-xl sm:text-2xl font-bold tracking-tight text-primary mb-2 sm:mb-3">{doc.data.title}</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-4 sm:mb-5">{doc.data.description}</p>
+
+                        <div class="space-y-1.5 sm:space-y-2 text-sm">
+                          <p class="text-on-surface-variant"><span class="font-semibold text-on-surface">Professor:</span> {doc.data.prof}</p>
+                          <p class="text-on-surface-variant"><span class="font-semibold text-on-surface">Contributor:</span> {doc.data.contributor}</p>
+                          <p class="text-on-surface-variant"><span class="font-semibold text-on-surface">Date:</span> {doc.data.date.toLocaleDateString("en-GB")}</p>
+                        </div>
+
+                        <div class="mt-4 sm:mt-5 flex flex-wrap gap-1.5 sm:gap-2">
+                          {doc.data.tags.map((tag: string) => (
+                            <span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-label uppercase tracking-wide">
+                              {tag}
+                            </span>
+                          ))}
+                          <span class="px-2.5 py-1 rounded-full bg-tertiary-container text-on-tertiary-container text-[11px] font-label uppercase tracking-wide">
+                            {doc.data.language.toUpperCase()}
+                          </span>
+                        </div>
+                      </article>
+                    </a>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+    )}
+  </section>
+</div>
+
+<style is:global>
+  /* ───── Hero section ───── */
+  .docs-hero {
+    padding: 2.25rem 0 1.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 35%, transparent);
+  }
+
+  @media (min-width: 640px) {
+    .docs-hero {
+      padding: 2.75rem 0 1.75rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .docs-hero {
+      padding: 3rem 0 2rem;
+    }
+  }
+
+  .docs-level-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 40%, transparent);
+    background: color-mix(in srgb, var(--sl-color-bg-nav, var(--color-surface-container-low)) 65%, transparent);
+    color: var(--sl-color-text, var(--color-on-surface));
+    font-size: 0.75rem;
+    font-family: var(--font-label, var(--sl-font));
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: border-color 150ms ease, transform 150ms ease, background-color 150ms ease;
+  }
+
+  .docs-level-chip:hover,
+  .docs-level-chip:focus-visible {
+    border-color: color-mix(in srgb, var(--sl-color-accent, var(--color-primary)) 55%, transparent);
+    background: color-mix(in srgb, var(--sl-color-accent-low, var(--color-secondary-container)) 55%, transparent);
+    transform: translateY(-1px);
+  }
+
+  /* ───── Body / cards section ───── */
+  .docs-body {
+    padding: 1.75rem 0 2.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .docs-body {
+      padding: 2.25rem 0 3rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .docs-body {
+      padding: 2.5rem 0 3.5rem;
+    }
+  }
+
+  .empty-state {
+    border-radius: 1rem;
+    border: 1px dashed color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 45%, transparent);
+    background: color-mix(in srgb, var(--sl-color-bg-nav, var(--color-surface-container-low)) 55%, transparent);
+    padding: 2rem 1.25rem;
+  }
+
+  /* ───── Level block ───── */
+  .level-block {
+    border-radius: 1rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 30%, transparent);
+    background: color-mix(in srgb, var(--sl-color-bg-nav, var(--color-surface-container-low)) 62%, transparent);
+    padding: 1rem 0.95rem;
+  }
+
+  @media (min-width: 640px) {
+    .level-block {
+      padding: 1.2rem;
+      border-radius: 1.25rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .level-block {
+      padding: 1.4rem;
+    }
+  }
+
+  .terms-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 960px) {
+    .terms-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+    }
+  }
+
+  .term-block {
+    border-radius: 0.9rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 24%, transparent);
+    background: color-mix(in srgb, var(--sl-color-bg, var(--color-surface)) 84%, transparent);
+    padding: 0.85rem;
+  }
+
+  /* ───── Cards row: horizontal scroll on small, wrapping grid on larger ───── */
+  .cards-row {
+    display: flex;
+    gap: 0.9rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* On mobile, cards are a fixed min-width so they scroll horizontally */
+  .doc-card {
+    display: block;
+    flex-shrink: 0;
+    width: min(17rem, 85vw);
+    scroll-margin-top: 6rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* On tablets and up, switch to a wrapping grid */
+  @media (min-width: 640px) {
+    .cards-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      overflow-x: visible;
+      padding-bottom: 0;
+    }
+
+    .doc-card {
+      width: auto;
+      flex-shrink: unset;
+    }
+  }
+
+  /* ───── Card inner styling ───── */
+  .doc-card-inner {
+    background: color-mix(in srgb, var(--sl-color-bg, var(--color-surface)) 88%, transparent);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 24%, transparent);
+    transition: all 150ms ease;
+    height: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .doc-card-inner {
+      padding: 1.2rem;
+    }
+  }
+
+  .doc-card:hover .doc-card-inner,
+  .doc-card:focus-visible .doc-card-inner {
+    border-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
+    background: var(--color-surface-bright);
+  }
+
+  .doc-card:focus-visible .doc-card-inner {
+    outline: 2px solid color-mix(in srgb, var(--color-primary) 50%, transparent);
+    outline-offset: 2px;
+  }
+</style>

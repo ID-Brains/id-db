@@ -1,0 +1,51 @@
+---
+import DefaultMobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
+---
+
+<div class="mobile-site-nav">
+	<p class="nav-title">Site Navigation</p>
+	<a href="/" class="nav-link">
+		<span class="material-symbols-outlined">home</span> Home
+	</a>
+	<a href="/docs" class="nav-link">
+		<span class="material-symbols-outlined">menu_book</span> Docs Library
+	</a>
+</div>
+
+<DefaultMobileMenuFooter {...Astro.props} />
+
+<style>
+	.mobile-site-nav {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding-block: 1rem;
+		border-top: 1px solid var(--sl-color-hairline-shade);
+		margin-top: 1rem;
+	}
+
+	.nav-title {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--sl-color-gray-3);
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+	}
+
+	.nav-link {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.75rem 1rem;
+		border-radius: 0.5rem;
+		color: var(--sl-color-white);
+		text-decoration: none;
+		font-weight: 600;
+		transition: background-color 0.2s;
+	}
+
+	.nav-link:hover {
+		background-color: var(--sl-color-gray-6);
+	}
+</style>
