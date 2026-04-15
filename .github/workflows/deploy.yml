@@ -22,6 +22,7 @@ jobs:
       - name: Install, build, and generate Pagefind index
         uses: withastro/action@v6
         with:
+          package-manager: npm
           # Custom build command to include Pagefind indexing
           # This ensures the search index is generated inside the dist folder
           build-cmd: |
