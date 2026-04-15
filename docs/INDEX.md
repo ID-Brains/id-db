@@ -1,10 +1,10 @@
-# Welcome to the College Knowledge Base
+# Welcome to the project-hikma
 
-Welcome to the **College Knowledge Base** (idbrains-db project)! This is a community-driven, open-source project dedicated to making academic knowledge accessible and collaborative for all students.
+Welcome to the **project-hikma** (idbrains-db project)! This is a community-driven, open-source project dedicated to making academic knowledge accessible and collaborative for all students.
 
 Whether you're here to learn, contribute, or maintain, this documentation will guide you through our mission and how to get involved.
 
-**Note that** : i mention this project by `College Knowledge Base` because we haven't decided a name yet but the codename of this project internally is `Hikma`.
+**Note that** : i mention this project by `project-hikma` because we haven't decided a name yet but the codename of this project internally is `Hikma`.
 ## 🌟 Where to Start?
 
 - **[Our Philosophy](./PHILOSOPHY.md):** Learn why we're building this and the values that guide us.

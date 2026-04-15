@@ -1,6 +1,6 @@
 # System Architecture & Automation
 
-This document outlines the technical design and automated workflows of the **College Knowledge Base**.
+This document outlines the technical design and automated workflows of the **project-hikma**.
 
 ## Architecture Overview
 

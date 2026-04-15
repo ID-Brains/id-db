@@ -6,7 +6,7 @@ We are excited to have people contribute contribute! Whether you're a first-leve
 
 There are two main paths for contributing content:
 
-### 1. The Web Form (Easiest but not done yet sorry look at the second way)
+### 1. The Web Form (Easiest but not done yet look at the second way)
 Best for students who aren't familiar with Git or Markdown.
 - **Location:** Visit `/contribute` on our live site.
 - **Process:** Authenticate with your GitHub account, fill in the fields, and upload your file or text.

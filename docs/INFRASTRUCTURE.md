@@ -1,6 +1,6 @@
 # Infrastructure & Tooling
 
-This document provides details on the core technical tools that power the **College Knowledge Base**.
+This document provides details on the core technical tools that power the **project-hikma**.
 
 ## 1. Search (Pagefind)
 

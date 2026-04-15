@@ -1,6 +1,6 @@
 # Roadmap & Open Questions
 
-This document is a living draft of our future plans for the **College Knowledge Base**.
+This document is a living draft of our future plans for the **project-hikma**.
 
 ## 📍 Project Roadmap
 

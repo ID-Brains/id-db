@@ -1,6 +1,6 @@
 # Moderation & Governance
 
-This document outlines how the **College Knowledge Base** community is managed and governed.
+This document outlines how the **project-hikma** community is managed and governed.
 
 ## Team Structure
 

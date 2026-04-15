@@ -2,7 +2,7 @@
 
 > "Knowledge is the only treasure that increases when shared."
 
-The **College Knowledge Base** (id-db) isn't just a technical repository; it's a digital commons built by students, for students. Our approach is rooted in the belief that academic success should be accessible, collaborative, and community-driven.
+The **project-hikma** (id-db) isn't just a technical repository; it's a digital commons built by students, for students. Our approach is rooted in the belief that academic success should be accessible, collaborative, and community-driven.
 
 ## Core Values
 

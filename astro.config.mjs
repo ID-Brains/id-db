@@ -14,7 +14,7 @@ export default defineConfig({
 	},
 	integrations: [
 		starlight({
-			title: 'College Knowledge Base',
+			title: 'project-hikma',
 			favicon: '/favicon.svg',
 			disable404Route: true,
 			customCss: ['./src/styles/global.css'],
