@@ -57,6 +57,8 @@
 :root {
 	--sl-font: var(--font-body);
 	--sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+	--sl-content-width: 78rem;
+	--sl-sidebar-width: 19rem;
 }
 
 html {
@@ -95,11 +97,9 @@ body[data-app-root] :is(h1, h2, h3, h4, h5, h6) {
 }
 
 .sidebar-pane {
-	background: linear-gradient(
-		180deg,
-		color-mix(in srgb, var(--color-surface-container-lowest) 96%, white 4%),
-		var(--color-surface)
-	) !important;
+	background: linear-gradient(180deg,
+			color-mix(in srgb, var(--color-surface-container-lowest) 96%, white 4%),
+			var(--color-surface)) !important;
 	border-inline-end: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent) !important;
 	backdrop-filter: blur(12px);
 }
@@ -202,9 +202,7 @@ body[data-app-root] :is(h1, h2, h3, h4, h5, h6) {
 }
 
 :root[data-theme="dark"] .sidebar-pane {
-	background: linear-gradient(
-		180deg,
-		color-mix(in srgb, var(--color-surface-container-lowest) 94%, black 6%),
-		var(--color-surface)
-	) !important;
+	background: linear-gradient(180deg,
+			color-mix(in srgb, var(--color-surface-container-lowest) 94%, black 6%),
+			var(--color-surface)) !important;
 }

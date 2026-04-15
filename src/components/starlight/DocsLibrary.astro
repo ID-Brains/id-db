@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 
 const docs = (await getCollection("docs"))
-  .filter((doc) => doc.id !== "docs" && doc.id !== "index")
+  .filter((doc) => doc.id !== "docs" && doc.id !== "index" && doc.id !== "404")
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 type DocEntry = (typeof docs)[number];
@@ -68,21 +68,35 @@ const levelLadders = Array.from(docsByLevel.entries())
         </div>
       </div>
     </div>
+
+    <nav class="mt-8 flex flex-wrap gap-2.5" aria-label="Browse docs by level">
+      {levelLadders.map((levelBlock) => (
+        <a href={`#level-${levelBlock.level}`} class="docs-level-chip">Level {levelBlock.level}</a>
+      ))}
+    </nav>
   </section>
 
   <!-- Level → Term → Cards -->
   <section class="docs-body">
-    <div class="space-y-10 sm:space-y-12">
+    {docs.length === 0 ? (
+      <section class="empty-state">
+        <h2 class="font-headline text-2xl sm:text-3xl font-bold text-primary mb-3">No docs yet</h2>
+        <p class="text-on-surface-variant max-w-xl">
+          Once content is added to the docs collection, it will appear here grouped by level and term.
+        </p>
+      </section>
+    ) : (
+    <div class="space-y-8 sm:space-y-10">
       {levelLadders.map((levelBlock) => (
-        <section class="level-block">
+        <section class="level-block" id={`level-${levelBlock.level}`}>
           <div class="mb-4 sm:mb-5 flex items-end justify-between gap-4">
             <h2 class="font-headline text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-primary uppercase">Level {levelBlock.level}</h2>
             <p class="font-label text-xs uppercase tracking-[0.16em] text-on-surface-variant whitespace-nowrap">{levelBlock.totalDocs} docs</p>
           </div>
 
-          <div class="space-y-6 border-l border-outline-variant/30 pl-4 sm:pl-5 md:pl-7">
+          <div class="terms-grid">
             {levelBlock.terms.map((termBlock) => (
-              <section>
+              <section class="term-block">
                 <div class="mb-3 flex items-center justify-between gap-3">
                   <h3 class="font-label text-sm uppercase tracking-[0.2em] text-on-surface-variant">Term {termBlock.term}</h3>
                   <span class="text-xs text-on-surface-variant uppercase tracking-wider">{termBlock.docs.length} docs</span>
@@ -139,96 +153,121 @@ const levelLadders = Array.from(docsByLevel.entries())
         </section>
       ))}
     </div>
+    )}
   </section>
 </div>
 
 <style is:global>
-  /* ───── Container: let the library fill the content area naturally ───── */
-  .sl-markdown-content:has(> .docs-library) {
-    max-width: none !important;
-    padding-inline: 0 !important;
-  }
-
-  .sl-markdown-content > .docs-library {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-  }
-
   /* ───── Hero section ───── */
   .docs-hero {
-    padding: 3rem 1rem 3rem 1rem;
-    background: var(--color-surface-container-low);
-    border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 25%, transparent);
+    padding: 2.25rem 0 1.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 35%, transparent);
   }
 
   @media (min-width: 640px) {
     .docs-hero {
-      padding: 4rem 1.5rem;
+      padding: 2.75rem 0 1.75rem;
     }
   }
 
   @media (min-width: 768px) {
     .docs-hero {
-      padding: 5rem 2rem;
+      padding: 3rem 0 2rem;
     }
   }
 
-  @media (min-width: 1152px) {
-    .docs-hero {
-      padding: 5rem 2.5rem;
-    }
+  .docs-level-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 40%, transparent);
+    background: color-mix(in srgb, var(--sl-color-bg-nav, var(--color-surface-container-low)) 65%, transparent);
+    color: var(--sl-color-text, var(--color-on-surface));
+    font-size: 0.75rem;
+    font-family: var(--font-label, var(--sl-font));
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: border-color 150ms ease, transform 150ms ease, background-color 150ms ease;
+  }
+
+  .docs-level-chip:hover,
+  .docs-level-chip:focus-visible {
+    border-color: color-mix(in srgb, var(--sl-color-accent, var(--color-primary)) 55%, transparent);
+    background: color-mix(in srgb, var(--sl-color-accent-low, var(--color-secondary-container)) 55%, transparent);
+    transform: translateY(-1px);
   }
 
   /* ───── Body / cards section ───── */
   .docs-body {
-    padding: 2.5rem 1rem;
-    background: var(--color-surface);
+    padding: 1.75rem 0 2.5rem;
   }
 
   @media (min-width: 640px) {
     .docs-body {
-      padding: 3rem 1.5rem;
+      padding: 2.25rem 0 3rem;
     }
   }
 
   @media (min-width: 768px) {
     .docs-body {
-      padding: 4rem 2rem;
+      padding: 2.5rem 0 3.5rem;
     }
   }
 
-  @media (min-width: 1152px) {
-    .docs-body {
-      padding: 5rem 2.5rem;
-    }
+  .empty-state {
+    border-radius: 1rem;
+    border: 1px dashed color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 45%, transparent);
+    background: color-mix(in srgb, var(--sl-color-bg-nav, var(--color-surface-container-low)) 55%, transparent);
+    padding: 2rem 1.25rem;
   }
 
   /* ───── Level block ───── */
   .level-block {
     border-radius: 1rem;
-    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 20%, transparent);
-    background: color-mix(in srgb, var(--color-surface-container-low) 40%, transparent);
-    padding: 1rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 30%, transparent);
+    background: color-mix(in srgb, var(--sl-color-bg-nav, var(--color-surface-container-low)) 62%, transparent);
+    padding: 1rem 0.95rem;
   }
 
   @media (min-width: 640px) {
     .level-block {
-      padding: 1.25rem;
+      padding: 1.2rem;
       border-radius: 1.25rem;
     }
   }
 
   @media (min-width: 768px) {
     .level-block {
-      padding: 1.5rem;
+      padding: 1.4rem;
     }
+  }
+
+  .terms-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 960px) {
+    .terms-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+    }
+  }
+
+  .term-block {
+    border-radius: 0.9rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 24%, transparent);
+    background: color-mix(in srgb, var(--sl-color-bg, var(--color-surface)) 84%, transparent);
+    padding: 0.85rem;
   }
 
   /* ───── Cards row: horizontal scroll on small, wrapping grid on larger ───── */
   .cards-row {
     display: flex;
-    gap: 1rem;
+    gap: 0.9rem;
     overflow-x: auto;
     padding-bottom: 0.5rem;
     scrollbar-width: thin;
@@ -262,17 +301,17 @@ const levelLadders = Array.from(docsByLevel.entries())
 
   /* ───── Card inner styling ───── */
   .doc-card-inner {
-    background: var(--color-surface-container-lowest);
+    background: color-mix(in srgb, var(--sl-color-bg, var(--color-surface)) 88%, transparent);
     border-radius: 0.75rem;
-    padding: 1.25rem;
-    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 15%, transparent);
+    padding: 1rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-gray-5, var(--color-outline-variant)) 24%, transparent);
     transition: all 150ms ease;
     height: 100%;
   }
 
   @media (min-width: 640px) {
     .doc-card-inner {
-      padding: 1.5rem;
+      padding: 1.2rem;
     }
   }
 

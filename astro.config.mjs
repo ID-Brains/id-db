@@ -12,6 +12,7 @@ export default defineConfig({
 		starlight({
 			title: 'College Knowledge Base',
 			favicon: '/favicon.svg',
+			disable404Route: true,
 			customCss: ['./src/styles/global.css'],
 			tableOfContents: false,
 			components: {
