@@ -5,8 +5,8 @@ This document is a living draft of our future plans for the **project-hikma**.
 ## 📍 Project Roadmap
 
 ### Phase 1: Core Content & Automation
-- [ ] Finalize the [Content Guidelines](./CONTENT_GUIDELINES.md) and frontmatter schema.
-- [ ] Implement the automated [Validation Pipeline](./ARCHITECTURE.md#1-validation-validateyml).
+- [x] Finalize the [Content Guidelines](./CONTENT_GUIDELINES.md) and frontmatter schema.
+- [x] Implement the automated [Validation Pipeline](./ARCHITECTURE.md#1-validation-validateyml).
 
 ### Phase 2: Community & Growth
 - [ ] Recruits [Subject Leads](./GOVERNANCE.md#subject-leads) for key subjects.
