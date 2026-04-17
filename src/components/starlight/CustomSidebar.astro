@@ -1,0 +1,33 @@
+---
+import DefaultSidebar from "@astrojs/starlight/components/Sidebar.astro";
+
+// Extract the current path to determine context
+const { pathname } = Astro.url;
+let { sidebar } = Astro.props;
+
+if (sidebar) {
+    // Decode pathname just in case
+    const decodedPathname = decodeURIComponent(pathname);
+
+    // Find the current level (e.g., 'level-1', 'level-2')
+    const pathSegments = decodedPathname.split("/").filter(Boolean);
+    const currentLevel = pathSegments.find((segment) =>
+        segment.startsWith("level-"),
+    );
+
+    if (currentLevel) {
+        // Mutate sidebar array to ONLY show the user's current level group
+        sidebar = sidebar.filter((group: any) => {
+            if (group.type !== "group") return true;
+
+            // Normalize group label (e.g., "Level 1" -> "level-1")
+            const normalizedLabel = group.label
+                .toLowerCase()
+                .replace(/\s+/g, "-");
+            return normalizedLabel === currentLevel || group.isLink; // Keep links if any
+        });
+    }
+}
+---
+
+<DefaultSidebar {...Astro.props} sidebar={sidebar} />

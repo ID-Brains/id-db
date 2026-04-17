@@ -6,7 +6,6 @@ description: "Comprehensive notes and Rust implementations for Data Structures m
 subject: "data_structures"
 level: "2"
 term: 2
-prof: "TBD"
 contributor: "k5602"
 tags: ["Data-Structures", "Rust", "Graphs", "Big-O"]
 language: "en"

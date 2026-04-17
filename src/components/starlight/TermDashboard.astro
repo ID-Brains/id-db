@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import { LinkCard, CardGrid } from "@astrojs/starlight/components";
+
+interface Props {
+    level: string;
+    term: number;
+}
+
+const { level, term } = Astro.props;
+
+const allDocs = await getCollection("docs");
+
+// Filter docs by this level and term, excluding index pages
+const termDocs = allDocs.filter(
+    (doc) =>
+        doc.data.level === level &&
+        doc.data.term === term &&
+        !doc.id.endsWith("index") &&
+        doc.id !== "docs" &&
+        doc.id !== "404",
+);
+
+// Group by subject
+const subjectsMap = new Map<string, typeof termDocs>();
+for (const doc of termDocs) {
+    const subj = doc.data.subject;
+    if (!subjectsMap.has(subj)) {
+        subjectsMap.set(subj, []);
+    }
+    subjectsMap.get(subj)!.push(doc);
+}
+
+const subjects = Array.from(subjectsMap.entries()).sort((a, b) =>
+    a[0].localeCompare(b[0]),
+);
+---
+
+{
+    subjects.length === 0 ? (
+        <p class="text-on-surface-variant text-center my-8">
+            No subjects have been added to this term yet.
+        </p>
+    ) : (
+        <CardGrid>
+            {subjects.map(([subjectName, docs]) => {
+                // Find the first doc to get the nested path structure
+                // e.g. level-2/term-2/data_structures/summaries/...
+                // We want to link to the first document in this subject or to a category
+                const firstDoc = docs[0];
+                const href = `${import.meta.env.BASE_URL}/${firstDoc.id}/`;
+
+                return (
+                    <LinkCard
+                        title={subjectName}
+                        description={`${docs.length} document${docs.length > 1 ? "s" : ""}`}
+                        href={href}
+                    />
+                );
+            })}
+        </CardGrid>
+    )
+}
