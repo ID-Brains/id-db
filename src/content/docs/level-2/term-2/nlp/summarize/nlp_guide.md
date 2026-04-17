@@ -1,7 +1,7 @@
 ---
 title: "The Definitive NLP Encyclopedia: From Linguistics to LLMs"
 date: "2026-04-17"
-type: "Comprehensive Academic Manual"
+type: "reference"
 description: "An exhaustive 800+ line technical guide covering the evolution, mathematics, and architectures of Natural Language Processing."
 subject: "nlp"
 level: "Post-Graduate / Senior CS"
