@@ -11,7 +11,6 @@ const { level, term } = Astro.props;
 
 const allDocs = await getCollection("docs");
 
-// Filter docs by this level and term, excluding index pages
 const termDocs = allDocs.filter(
     (doc) =>
         doc.data.level === level &&
@@ -21,41 +20,53 @@ const termDocs = allDocs.filter(
         doc.id !== "404",
 );
 
-// Group by subject
-const subjectsMap = new Map<string, typeof termDocs>();
+const grouped = new Map<string, typeof termDocs>();
 for (const doc of termDocs) {
-    const subj = doc.data.subject;
-    if (!subjectsMap.has(subj)) {
-        subjectsMap.set(subj, []);
+    const key = doc.data.subject;
+    if (!grouped.has(key)) {
+        grouped.set(key, []);
     }
-    subjectsMap.get(subj)!.push(doc);
+    grouped.get(key)!.push(doc);
 }
 
-const subjects = Array.from(subjectsMap.entries()).sort((a, b) =>
-    a[0].localeCompare(b[0]),
-);
+const aiSubjects = new Set<string>();
+for (const doc of termDocs) {
+    if ((doc.data as { isAiGenerated?: boolean }).isAiGenerated === true) {
+        aiSubjects.add(doc.data.subject);
+    }
+}
+
+const subjectList = Array.from(grouped.keys()).sort((a, b) => a.localeCompare(b));
+const sortedSubjects = subjectList.sort((a, b) => {
+    const aIsAi = aiSubjects.has(a);
+    const bIsAi = aiSubjects.has(b);
+    if (aIsAi === bIsAi) return a.localeCompare(b);
+    return aIsAi ? 1 : -1;
+});
 ---
 
 {
-    subjects.length === 0 ? (
+    sortedSubjects.length === 0 ? (
         <p class="text-on-surface-variant text-center my-8">
             No subjects have been added to this term yet.
         </p>
     ) : (
         <CardGrid>
-            {subjects.map(([subjectName, docs]) => {
-                // Find the first doc to get the nested path structure
-                // e.g. level-2/term-2/data_structures/summaries/...
-                // We want to link to the first document in this subject or to a category
-                const firstDoc = docs[0];
+            {sortedSubjects.map((subjName) => {
+                const docsForSubject = grouped.get(subjName)!;
+                const isAi = aiSubjects.has(subjName);
+                const firstDoc = docsForSubject[0];
                 const href = `${import.meta.env.BASE_URL}/${firstDoc.id}/`;
+                const count = docsForSubject.length;
 
                 return (
                     <LinkCard
-                        title={subjectName}
-                        description={`${docs.length} document${docs.length > 1 ? "s" : ""}`}
+                        title={subjName}
+                        description={`${count} document${count > 1 ? "s" : ""}`}
                         href={href}
-                    />
+                    >
+                        {isAi && <span class="badge">AI Generated</span>}
+                    </LinkCard>
                 );
             })}
         </CardGrid>
