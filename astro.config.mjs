@@ -26,6 +26,7 @@ export default defineConfig({
 				Header: './src/components/starlight/CustomHeader.astro',
 				MobileMenuFooter: './src/components/starlight/MobileMenuFooter.astro',
 				Footer: './src/components/starlight/Footer.astro',
+				Sidebar: './src/components/starlight/CustomSidebar.astro',
 			},
 			plugins: [
 				starlightKatex(),
