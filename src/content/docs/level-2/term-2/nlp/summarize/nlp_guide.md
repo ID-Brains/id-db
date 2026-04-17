@@ -4,7 +4,7 @@ date: "2026-04-17"
 type: "reference"
 description: "An exhaustive 800+ line technical guide covering the evolution, mathematics, and architectures of Natural Language Processing."
 subject: "nlp"
-level: "Post-Graduate / Senior CS"
+level: 2
 term: 2
 prof: "TBD"
 contributor: "Youssefelaskandrany"
