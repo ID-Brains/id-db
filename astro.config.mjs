@@ -49,22 +49,22 @@ export default defineConfig({
 				{
 					label: 'Level 1',
 					collapsed: true,
-					autogenerate: { directory: 'level-1' },
+					autogenerate: { directory: 'docs/level-1' },
 				},
 				{
 					label: 'Level 2',
 					collapsed: true,
-					autogenerate: { directory: 'level-2' },
+					autogenerate: { directory: 'docs/level-2' },
 				},
 				{
 					label: 'Level 3',
 					collapsed: true,
-					autogenerate: { directory: 'level-3' },
+					autogenerate: { directory: 'docs/level-3' },
 				},
 				{
 					label: 'Level 4',
 					collapsed: true,
-					autogenerate: { directory: 'level-4' },
+					autogenerate: { directory: 'docs/level-4' },
 				},
 			],
 		}),

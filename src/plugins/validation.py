@@ -9,7 +9,7 @@ import frontmatter
 from pydantic import BaseModel, Field, ValidationError, field_validator
 
 LEVEL_MIN = 1
-LEVEL_MAX = 5
+LEVEL_MAX = 4
 TERM_VALUES = {1, 2}
 VALID_LANGUAGES = {"ar", "en"}
 VALID_TYPES = {"summary", "quiz", "notes", "reference"}
