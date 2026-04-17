@@ -6,10 +6,10 @@ description: "An exhaustive 800+ line technical guide covering the evolution, ma
 subject: "nlp"
 level: 2
 term: 2
-prof: "TBD"
 contributor: "Youssefelaskandrany"
 tags: ["NLP", "Deep-Learning", "Transformers", "LLMs", "Mathematics", "Optimization", "AI-Systems"]
 language: "en"
+isAiGenerated: true
 ---
 
 # Natural Language Processing — The Complete Notes
@@ -116,7 +116,7 @@ In 1950, scientist Alan Turing proposed a test known as the **Turing Test** to m
 
 One of the early conversational programs was **ELIZA**, designed by Joseph Weizenbaum in 1966. This program simulated a psychotherapist. It had **no real understanding**; it relied on simple **pattern-matching** on user inputs and transforming them into **canned responses**.
 
-> **💡 ELIZA Example:**  
+> **💡 ELIZA Example:**
 > If the user said "I am unhappy," the program would reply: "How do you feel about being unhappy?"
 
 #### Python Code — Simulating ELIZA Pattern Matching
@@ -1064,4 +1064,3 @@ These gradients are used to update the weight matrices `W` and bias vectors `b` 
 - **Modern word embeddings** – GloVe (global co-occurrence), FastText (subword information), BERT (contextual, transformer-based).
 
 ---
-
