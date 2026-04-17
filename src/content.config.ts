@@ -14,6 +14,7 @@ const FormattSchema = z.object({
 	tags: z.array(z.string()),
 	language: z.enum(["ar", "en"]),
 	giscus: z.boolean().optional(),
+	isAiGenerated: z.boolean().optional(),
 })
 
 export type Formatt = z.infer<typeof FormattSchema>;

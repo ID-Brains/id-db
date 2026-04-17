@@ -25,6 +25,7 @@ class Schema(BaseModel):
     contributor: str = Field(min_length=1)
     tags: list[str]
     language: Literal["ar", "en"]
+    isAiGenerated: bool | None = None
 
     @field_validator("title", "subject", "contributor")
     @classmethod
