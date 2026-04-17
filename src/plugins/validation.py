@@ -22,12 +22,11 @@ class Schema(BaseModel):
     subject: str = Field(min_length=1)
     level: int
     term: int
-    prof: str = Field(min_length=1)
     contributor: str = Field(min_length=1)
     tags: list[str]
     language: Literal["ar", "en"]
 
-    @field_validator("title", "subject", "prof", "contributor")
+    @field_validator("title", "subject", "contributor")
     @classmethod
     def _strip_text(cls, value: str) -> str:
         stripped = value.strip()
