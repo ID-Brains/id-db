@@ -1,0 +1,24 @@
+---
+title: Level 1
+date: 2026-04-13
+description: Browse Term 1 and Term 2 for Level 1.
+subject: documentation
+level: "1"
+term: 1
+contributor: Maintainer
+tags:
+  - docs
+language: en
+template: splash
+giscus: false
+hero:
+  title: Level 1 Dashboard
+  tagline: Select a term to begin.
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+  <LinkCard title="Term 1" description="First semester subjects" href="./term-1/" />
+  <LinkCard title="Term 2" description="Second semester subjects" href="./term-2/" />
+</CardGrid>

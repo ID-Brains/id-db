@@ -1,19 +1,28 @@
 ---
-title: All Docs
+title: Knowledge Base
 slug: docs
 date: 2026-04-13
 description: Browse all contributed docs by subject, level, and term.
 subject: documentation
 level: "1"
 term: 1
-prof: Team
 contributor: Maintainer
 tags:
   - docs
   - library
 language: en
+template: splash
+giscus: false
+hero:
+  title: Select Your Academic Level
+  tagline: Browse student-contributed lecture notes, summaries, and practical reports.
 ---
 
-import DocsLibrary from "../../components/starlight/DocsLibrary.astro";
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-<DocsLibrary />
+<CardGrid stagger>
+  <LinkCard title="Level 1" description="Freshman year subjects" href="./level-1/" />
+  <LinkCard title="Level 2" description="Sophomore year subjects" href="./level-2/" />
+  <LinkCard title="Level 3" description="Junior year subjects" href="./level-3/" />
+  <LinkCard title="Level 4" description="Senior year subjects" href="./level-4/" />
+</CardGrid>
