@@ -3,7 +3,7 @@ title: Knowledge Base
 date: 2026-04-13
 description: Browse all contributed docs by subject, level, and term.
 subject: documentation
-level: "1"
+level: 1
 term: 1
 contributor: Maintainer
 tags:
@@ -20,8 +20,8 @@ hero:
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
-  <LinkCard title="Level 1" description="Freshman year subjects" href="./level-1/" />
-  <LinkCard title="Level 2" description="Sophomore year subjects" href="./level-2/" />
-  <LinkCard title="Level 3" description="Junior year subjects" href="./level-3/" />
-  <LinkCard title="Level 4" description="Senior year subjects" href="./level-4/" />
+  <LinkCard title="Level 1" description="Freshman year subjects" href={`${import.meta.env.BASE_URL}/docs/level-1/`} />
+  <LinkCard title="Level 2" description="Sophomore year subjects" href={`${import.meta.env.BASE_URL}/docs/level-2/`} />
+  <LinkCard title="Level 3" description="Junior year subjects" href={`${import.meta.env.BASE_URL}/docs/level-3/`} />
+  <LinkCard title="Level 4" description="Senior year subjects" href={`${import.meta.env.BASE_URL}/docs/level-4/`} />
 </CardGrid>

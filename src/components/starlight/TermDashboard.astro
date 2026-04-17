@@ -3,18 +3,20 @@ import { getCollection } from "astro:content";
 import { LinkCard, CardGrid } from "@astrojs/starlight/components";
 
 interface Props {
-    level: string;
+    level: number;
     term: number;
 }
 
 const { level, term } = Astro.props;
 
 const allDocs = await getCollection("docs");
+const excludedSubjects = new Set(["documentation"]);
 
 const termDocs = allDocs.filter(
     (doc) =>
         doc.data.level === level &&
         doc.data.term === term &&
+        !excludedSubjects.has(doc.data.subject) &&
         !doc.id.endsWith("index") &&
         doc.id !== "docs" &&
         doc.id !== "404",
@@ -29,44 +31,31 @@ for (const doc of termDocs) {
     grouped.get(key)!.push(doc);
 }
 
-const aiSubjects = new Set<string>();
-for (const doc of termDocs) {
-    if ((doc.data as { isAiGenerated?: boolean }).isAiGenerated === true) {
-        aiSubjects.add(doc.data.subject);
-    }
-}
-
 const subjectList = Array.from(grouped.keys()).sort((a, b) => a.localeCompare(b));
-const sortedSubjects = subjectList.sort((a, b) => {
-    const aIsAi = aiSubjects.has(a);
-    const bIsAi = aiSubjects.has(b);
-    if (aIsAi === bIsAi) return a.localeCompare(b);
-    return aIsAi ? 1 : -1;
-});
 ---
 
 {
-    sortedSubjects.length === 0 ? (
+    subjectList.length === 0 ? (
         <p class="text-on-surface-variant text-center my-8">
             No subjects have been added to this term yet.
         </p>
     ) : (
         <CardGrid>
-            {sortedSubjects.map((subjName) => {
+            {subjectList.map((subjName) => {
                 const docsForSubject = grouped.get(subjName)!;
-                const isAi = aiSubjects.has(subjName);
                 const firstDoc = docsForSubject[0];
-                const href = `${import.meta.env.BASE_URL}/${firstDoc.id}/`;
+                const href = `${import.meta.env.BASE_URL}/docs/${firstDoc.id.replace(/^docs\//, "")}/`;
                 const count = docsForSubject.length;
+                const isAi = docsForSubject.some(
+                    (doc) => (doc.data as { isAiGenerated?: boolean }).isAiGenerated === true,
+                );
 
                 return (
                     <LinkCard
                         title={subjName}
                         description={`${count} document${count > 1 ? "s" : ""}`}
                         href={href}
-                    >
-                        {isAi && <span class="badge">AI Generated</span>}
-                    </LinkCard>
+                    />
                 );
             })}
         </CardGrid>

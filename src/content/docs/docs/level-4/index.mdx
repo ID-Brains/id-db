@@ -3,7 +3,7 @@ title: Level 4
 date: 2026-04-13
 description: Browse Term 1 and Term 2 for Level 4.
 subject: documentation
-level: "4"
+level: 4
 term: 1
 contributor: Maintainer
 tags:
@@ -19,6 +19,6 @@ hero:
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
-  <LinkCard title="Term 1" description="First semester subjects" href="./term-1/" />
-  <LinkCard title="Term 2" description="Second semester subjects" href="./term-2/" />
+  <LinkCard title="Term 1" description="First semester subjects" href={`${import.meta.env.BASE_URL}/docs/level-4/term-1/`} />
+  <LinkCard title="Term 2" description="Second semester subjects" href={`${import.meta.env.BASE_URL}/docs/level-4/term-2/`} />
 </CardGrid>

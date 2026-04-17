@@ -12,7 +12,7 @@ if (sidebar) {
     // Find the current level (e.g., 'level-1', 'level-2')
     const pathSegments = decodedPathname.split("/").filter(Boolean);
     const currentLevel = pathSegments.find((segment) =>
-        segment.startsWith("level-"),
+        /^level-[1-4]$/.test(segment),
     );
 
     if (currentLevel) {

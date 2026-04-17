@@ -9,6 +9,9 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 
 const shouldRenderSearch =
 	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+
+const page = Astro.props.page ?? Astro.props.entry;
+const isAiGenerated = page?.data?.isAiGenerated === true;
 ---
 
 <header class="my-header">
@@ -30,6 +33,12 @@ const shouldRenderSearch =
 		</div>
 	</nav>
 </header>
+
+{isAiGenerated && (
+	<div class="my-ai-banner">
+		<span class="my-ai-badge">AI Generated</span>
+	</div>
+)}
 
 <style>
 	.my-header {
@@ -66,6 +75,25 @@ const shouldRenderSearch =
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
+	}
+
+	.my-ai-banner {
+		margin: 0.75rem 0 0;
+		padding-inline: 1.5rem;
+	}
+
+	.my-ai-badge {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.25rem 0.625rem;
+		border-radius: 999px;
+		background: var(--sl-color-accent-low);
+		color: var(--sl-color-accent-high);
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		white-space: nowrap;
 	}
 
 	.my-desktop-only {
