@@ -4,7 +4,7 @@ date: "2026-04-15"
 type: "summary"
 description: "Comprehensive notes and Rust implementations for Data Structures midterm, covering Queues, Stacks, Big-O, and Graph Algorithms."
 subject: "data_structures"
-level: "2"
+level: 2
 term: 2
 contributor: "k5602"
 tags: ["Data-Structures", "Rust", "Graphs", "Big-O"]

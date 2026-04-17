@@ -8,7 +8,7 @@ const FormattSchema = z.object({
 	date: z.coerce.date(),
 	description: z.string(),
 	subject: z.string(),
-	level: z.enum(["1", "2", "3", "4"]),
+	level: z.coerce.number().int().min(1).max(4),
 	term: z.number().min(1).max(2),
 	contributor: z.string(),
 	tags: z.array(z.string()),

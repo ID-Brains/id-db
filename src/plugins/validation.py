@@ -35,12 +35,28 @@ class Schema(BaseModel):
             raise ValueError("field cannot be empty")
         return stripped
 
-    @field_validator("level")
+    @field_validator("level", mode="before")
     @classmethod
-    def _check_level(cls, value: int) -> int:
-        if not LEVEL_MIN <= value <= LEVEL_MAX:
+    def _coerce_level(cls, value: object) -> int:
+        if isinstance(value, bool):
+            raise TypeError("level must be an integer between 1 and 4")
+
+        if isinstance(value, int):
+            coerced = value
+        elif isinstance(value, str):
+            stripped = value.strip()
+            if not stripped:
+                raise ValueError("level must be an integer between 1 and 4")
+            try:
+                coerced = int(stripped)
+            except ValueError as err:
+                raise ValueError("level must be an integer between 1 and 4") from err
+        else:
+            raise TypeError("level must be an integer between 1 and 4")
+
+        if not LEVEL_MIN <= coerced <= LEVEL_MAX:
             raise ValueError(f"level must be between {LEVEL_MIN} and {LEVEL_MAX}")
-        return value
+        return coerced
 
     @field_validator("term")
     @classmethod
