@@ -17,7 +17,10 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'project-hikma',
-			favicon: '/favicon.svg',
+			logo: {
+				src: './public/Hikma_icon.svg',
+			},
+			favicon: '/Hikma_icon.svg',
 			disable404Route: true,
 			customCss: ['./src/styles/global.css'],
 			tableOfContents: false,
