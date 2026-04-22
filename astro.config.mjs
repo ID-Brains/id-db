@@ -30,7 +30,7 @@ export default defineConfig({
 			favicon: '/Hikma_icon.svg',
 			disable404Route: true,
 			customCss: ['./src/styles/global.css'],
-			tableOfContents: false,
+			tableOfContents: true,
 			components: {
 				Head: './src/components/starlight/Head.astro',
 				Header: './src/components/starlight/CustomHeader.astro',
