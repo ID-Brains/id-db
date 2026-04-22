@@ -14,8 +14,6 @@ isAiGenerated: true
 
 # Natural Language Processing — The Complete Notes
 
-#NLP #Linguistics #Machine-Learning #Deep-Learning #Word2vec #Neural-Networks
-
 ## LECTURE 1
 ### High-Level Overview
 

@@ -1,6 +1,5 @@
 ---
 import config from 'virtual:starlight/user-config';
-
 import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
 import Search from 'virtual:starlight/components/Search';
 import SiteTitle from 'virtual:starlight/components/SiteTitle';
@@ -8,13 +7,8 @@ import SocialIcons from 'virtual:starlight/components/SocialIcons';
 import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 
 
-
-
 const shouldRenderSearch =
 	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
-
-const page = Astro.props.page ?? Astro.props.entry;
-const isAiGenerated = page?.data?.isAiGenerated === true;
 ---
 
 <header class="my-header">
@@ -37,11 +31,7 @@ const isAiGenerated = page?.data?.isAiGenerated === true;
 	</nav>
 </header>
 
-{isAiGenerated && (
-	<div class="my-ai-banner">
-		<span class="my-ai-badge">AI Generated</span>
-	</div>
-)}
+
 
 <style>
 	.my-header {
@@ -83,20 +73,6 @@ const isAiGenerated = page?.data?.isAiGenerated === true;
 	.my-ai-banner {
 		margin: 0.75rem 0 0;
 		padding-inline: 1.5rem;
-	}
-
-	.my-ai-badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.25rem 0.625rem;
-		border-radius: 999px;
-		background: var(--sl-color-accent-low);
-		color: var(--sl-color-accent-high);
-		font-size: 0.75rem;
-		font-weight: 700;
-		letter-spacing: 0.02em;
-		text-transform: uppercase;
-		white-space: nowrap;
 	}
 
 	.my-desktop-only {

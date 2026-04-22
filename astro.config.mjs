@@ -37,7 +37,7 @@ export default defineConfig({
 				MobileMenuFooter: './src/components/starlight/MobileMenuFooter.astro',
 				Footer: './src/components/starlight/Footer.astro',
 				Sidebar: './src/components/starlight/CustomSidebar.astro',
-				PageTitle: './src/components/Ai_PageTitle.astro',
+				PageTitle: './src/components/PageTitle.astro',
 			},
 			plugins: [
 				starlightKatex(),

@@ -1,0 +1,66 @@
+---
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+
+const { entry } = Astro.locals.starlightRoute;
+const { tags , isAiGenerated } = entry.data;
+
+// Time counting based on 200 words per minute reading speed 
+const content = entry.body || "";
+const words = content.split(/\s+/).length;
+const readingTime = Math.max(1, Math.ceil(words / 200));
+---
+
+{isAiGenerated && (
+  <div class="ai-badge">
+    <span>✨ AI Generated</span>
+  </div>
+)}
+
+{tags && tags.length > 0 && (
+  <div class="tags-container">
+    {tags.map((tag: string) => (
+      <span class="tag-item">{tag}</span>
+    ))}
+  </div>
+)}
+
+  <span class="reading-time">
+    ⏱️ Reading Time: {readingTime} {readingTime === 1 ? 'minute' : 'minutes'}
+  </span>
+</div>
+
+<Default />
+
+<style>
+  .ai-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--sl-color-bg-inline-code);
+    color: var(--sl-color-text-accent);
+    border: 1px solid var(--sl-color-hairline);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    width: fit-content;
+  }
+  .tags-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .tag-item {
+    font-size: 0.85rem;
+    color: var(--sl-color-text-accent);
+    background: var(--sl-color-bg-inline-code);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .reading-time {
+    font-size: 0.85rem;
+    color: var(--sl-color-gray-3);
+    font-weight: 500;
+  }
+  
+</style>
