@@ -5,15 +5,20 @@ import tailwindcss from '@tailwindcss/vite';
 import starlightGiscus from 'starlight-giscus';
 import { starlightKatex } from 'starlight-katex';
 
+const tailwindPlugin = /** @type {any} */ (tailwindcss());
+
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://ID-Brains.github.io/',
 	base: '/id-db',
-	vite: {
-		plugins: [tailwindcss()],
+	vite: /** @type {any} */ ({
+		resolve: /** @type {any} */ ({
+			tsconfigPaths: true,
+		}),
+		plugins: [tailwindPlugin],
 		globs: ['src/**/*.js'],
 		exclude: ['node_modules'],
-	},
+	}),
 	integrations: [
 		starlight({
 			title: 'project-hikma',
@@ -30,10 +35,11 @@ export default defineConfig({
 				MobileMenuFooter: './src/components/starlight/MobileMenuFooter.astro',
 				Footer: './src/components/starlight/Footer.astro',
 				Sidebar: './src/components/starlight/CustomSidebar.astro',
+				PageTitle: './src/components/Ai_PageTitle.astro',
 			},
 			plugins: [
 				starlightKatex(),
-				starlightGiscus({
+				starlightGiscus(/** @type {any} */ ({
 					repo: 'ID-Brains/id-db',
 					repoId: 'R_kgDOR9twsg',
 					category: 'Q&A',
@@ -44,7 +50,7 @@ export default defineConfig({
 					theme: 'preferred_color_scheme',
 					lang: 'en',
 					lazy: true,
-				}),
+				})),
 			],
 
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/ID-Brains/id-db' }],
