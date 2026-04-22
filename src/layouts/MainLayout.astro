@@ -18,6 +18,13 @@ const { title = "project-hikma" } = Astro.props;
   <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/id-db/Hikma_icon.svg" />
 
+  <!-- RSS Feed Auto-Discovery -->
+  <link rel="alternate" type="application/rss+xml" title="Project Hikma - All Content" href="https://ID-Brains.github.io/id-db/rss.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Project Hikma - Level 1" href="https://ID-Brains.github.io/id-db/rss/level-1.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Project Hikma - Level 2" href="https://ID-Brains.github.io/id-db/rss/level-2.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Project Hikma - Level 3" href="https://ID-Brains.github.io/id-db/rss/level-3.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Project Hikma - Level 4" href="https://ID-Brains.github.io/id-db/rss/level-4.xml" />
+
   <script>
     import { applyStoredAppearance } from "../scripts/appearance";
 

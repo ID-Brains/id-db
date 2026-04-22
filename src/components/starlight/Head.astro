@@ -2,10 +2,19 @@
 import Default from '@astrojs/starlight/components/Head.astro';
 
 const faviconHref = `${import.meta.env.BASE_URL}Hikma_icon.svg`;
+const baseUrl = import.meta.env.BASE_URL || '/id-db/';
+const siteUrl = 'https://ID-Brains.github.io';
 ---
 <Default {...Astro.props}><slot /></Default>
 
 <link rel="icon" type="image/svg+xml" href={faviconHref} />
+
+<!-- RSS Feed Auto-Discovery -->
+<link rel="alternate" type="application/rss+xml" title="Project Hikma - All Content" href={`${siteUrl}${baseUrl}rss.xml`} />
+<link rel="alternate" type="application/rss+xml" title="Project Hikma - Level 1" href={`${siteUrl}${baseUrl}rss/level-1.xml`} />
+<link rel="alternate" type="application/rss+xml" title="Project Hikma - Level 2" href={`${siteUrl}${baseUrl}rss/level-2.xml`} />
+<link rel="alternate" type="application/rss+xml" title="Project Hikma - Level 3" href={`${siteUrl}${baseUrl}rss/level-3.xml`} />
+<link rel="alternate" type="application/rss+xml" title="Project Hikma - Level 4" href={`${siteUrl}${baseUrl}rss/level-4.xml`} />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
 <link
