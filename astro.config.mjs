@@ -6,11 +6,13 @@ import starlightGiscus from 'starlight-giscus';
 import { starlightKatex } from 'starlight-katex';
 
 const tailwindPlugin = /** @type {any} */ (tailwindcss());
+const SITE = 'https://ID-Brains.github.io/';
+const BASE = '/id-db/';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://ID-Brains.github.io/',
-	base: '/id-db',
+	site: SITE,
+	base: BASE,
 	vite: /** @type {any} */ ({
 		resolve: /** @type {any} */ ({
 			tsconfigPaths: true,
