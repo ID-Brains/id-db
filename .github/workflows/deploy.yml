@@ -6,6 +6,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
 # Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
@@ -19,6 +23,13 @@ jobs:
       - name: Checkout your repository
         uses: actions/checkout@v6
 
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+
       - name: Install, build, and generate Pagefind index
         uses: withastro/action@v6
         with:
@@ -26,7 +37,7 @@ jobs:
           # Custom build command to include Pagefind indexing
           # This ensures the search index is generated inside the dist folder
           build-cmd: |
-            npm run build && npx pagefind --site dist
+            npm run build && npx pagefind@1.3.0 --site dist
 
   deploy:
     needs: build

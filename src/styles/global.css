@@ -61,23 +61,25 @@
 	--sl-sidebar-width: 19rem;
 }
 
+/* Overrides browser default; kept important to ensure custom sizing works */
 html {
 	font-size: var(--app-font-size, 16px) !important;
 	font-family: var(--font-body);
 }
 
+/* Overrides browser default; kept important to ensure custom line-height works */
 body {
 	background: var(--color-surface);
 	color: var(--color-on-surface);
 	line-height: var(--app-line-height, 1.5) !important;
 }
 
-body[data-app-root] :is(p, li, blockquote) {
-	line-height: var(--app-line-height, 1.6) !important;
+html body[data-app-root] :is(p, li, blockquote) {
+	line-height: var(--app-line-height, 1.6);
 }
 
-body[data-app-root] :is(h1, h2, h3, h4, h5, h6) {
-	line-height: var(--app-line-height-headings, 1.2) !important;
+html body[data-app-root] :is(h1, h2, h3, h4, h5, h6) {
+	line-height: var(--app-line-height-headings, 1.2);
 }
 
 .sl-markdown-content {
@@ -89,24 +91,24 @@ body[data-app-root] :is(h1, h2, h3, h4, h5, h6) {
 	letter-spacing: -0.03em;
 }
 
-.sl-markdown-content,
-.sl-markdown-content p,
-.sl-markdown-content li,
-.sl-markdown-content blockquote {
-	line-height: var(--app-line-height, 1.5) !important;
+html .sl-markdown-content,
+html .sl-markdown-content p,
+html .sl-markdown-content li,
+html .sl-markdown-content blockquote {
+	line-height: var(--app-line-height, 1.5);
 }
 
-.sidebar-pane {
+html .sidebar-pane {
 	background: linear-gradient(180deg,
 			color-mix(in srgb, var(--color-surface-container-lowest) 96%, white 4%),
-			var(--color-surface)) !important;
-	border-inline-end: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent) !important;
+			var(--color-surface));
+	border-inline-end: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
 	backdrop-filter: blur(12px);
 }
 
-.sidebar-content {
-	padding-top: 1.25rem !important;
-	gap: 1.15rem !important;
+html .sidebar-content {
+	padding-top: 1.25rem;
+	gap: 1.15rem;
 	font-family: var(--font-body);
 }
 
@@ -120,29 +122,29 @@ body[data-app-root] :is(h1, h2, h3, h4, h5, h6) {
 		box-shadow 160ms ease;
 }
 
-.sidebar-pane a {
-	padding-block: 0.6rem !important;
-	padding-inline: 0.9rem !important;
-	color: var(--color-on-surface-variant) !important;
+html .sidebar-pane a {
+	padding-block: 0.6rem;
+	padding-inline: 0.9rem;
+	color: var(--color-on-surface-variant);
 	background: transparent;
 }
 
-.sidebar-pane a:hover {
+html .sidebar-pane a:hover {
 	background: color-mix(in srgb, var(--color-secondary-container) 55%, transparent);
-	color: var(--color-on-surface) !important;
+	color: var(--color-on-surface);
 	transform: translateX(2px);
 }
 
-.sidebar-pane [aria-current="page"] {
-	background: linear-gradient(135deg, var(--color-primary), var(--color-primary-container)) !important;
-	color: var(--color-on-primary) !important;
+html .sidebar-pane [aria-current="page"] {
+	background: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
+	color: var(--color-on-primary);
 	box-shadow: 0 10px 24px color-mix(in srgb, var(--color-primary) 20%, transparent);
 }
 
-.sidebar-pane summary {
-	padding-block: 0.65rem !important;
-	padding-inline: 0.9rem !important;
-	color: var(--color-on-surface) !important;
+html .sidebar-pane summary {
+	padding-block: 0.65rem;
+	padding-inline: 0.9rem;
+	color: var(--color-on-surface);
 	font-family: var(--font-label);
 	text-transform: uppercase;
 	letter-spacing: 0.14em;
@@ -150,9 +152,9 @@ body[data-app-root] :is(h1, h2, h3, h4, h5, h6) {
 	font-weight: 700;
 }
 
-.sidebar-pane .large {
+html .sidebar-pane .large {
 	font-family: var(--font-headline);
-	font-size: 0.98rem !important;
+	font-size: 0.98rem;
 	font-weight: 700;
 	text-transform: none;
 	letter-spacing: -0.02em;
@@ -172,12 +174,12 @@ body[data-app-root] :is(h1, h2, h3, h4, h5, h6) {
 	--font-headline: "Cairo", sans-serif;
 }
 
-[dir="rtl"] .sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
-	line-height: 1.4 !important;
+html[dir="rtl"] .sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
+	line-height: 1.4;
 }
 
-[dir="rtl"] .sl-markdown-content :is(p, li, blockquote) {
-	line-height: 1.8 !important;
+html[dir="rtl"] .sl-markdown-content :is(p, li, blockquote) {
+	line-height: 1.8;
 }
 
 :root[data-theme="light"] {
@@ -215,8 +217,8 @@ body[data-app-root] :is(h1, h2, h3, h4, h5, h6) {
 	--sl-color-hairline-light: color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
 }
 
-:root[data-theme="dark"] .sidebar-pane {
+html[data-theme="dark"] .sidebar-pane {
 	background: linear-gradient(180deg,
 			color-mix(in srgb, var(--color-surface-container-lowest) 94%, black 6%),
-			var(--color-surface)) !important;
+			var(--color-surface));
 }

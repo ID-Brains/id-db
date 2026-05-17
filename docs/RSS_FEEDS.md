@@ -34,8 +34,8 @@ Our RSS feeds include:
 ```xml
 <item>
   <title>The Definitive NLP Encyclopedia: From Linguistics to LLMs</title>
-  <link>https://ID-Brains.github.io/id-db/docs/docs/level-2/term-2/nlp/summaries/nlp_guide/</link>
-  <guid isPermaLink="true">https://ID-Brains.github.io/id-db/docs/docs/level-2/term-2/nlp/summaries/nlp_guide/</guid>
+  <link>https://ID-Brains.github.io/id-db/docs/level-2/term-2/nlp/summaries/nlp_guide/</link>
+  <guid isPermaLink="true">https://ID-Brains.github.io/id-db/docs/level-2/term-2/nlp/summaries/nlp_guide/</guid>
   <description>An exhaustive 800+ line technical guide...</description>
   <pubDate>Fri, 17 Apr 2026 00:00:00 GMT</pubDate>
   <dc:creator>Youssefelaskandrany</dc:creator>

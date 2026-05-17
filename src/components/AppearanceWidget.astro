@@ -2,11 +2,11 @@
 ---
 <div class="fixed bottom-6 right-6 z-[100] font-body" data-appearance-widget>
   <!-- Popover Panel -->
-  <div id="appearance-panel" class="hidden absolute bottom-[calc(100%+1rem)] right-0 w-[320px] bg-surface-container-lowest/85 backdrop-blur-3xl border border-outline-variant/30 rounded-3xl p-6 shadow-[0_32px_64px_rgba(0,0,0,0.12)] transform origin-bottom-right transition-all duration-300 scale-95 opacity-0">
+  <div id="appearance-panel" class="hidden absolute bottom-[calc(100%+1rem)] right-0 w-[320px] bg-surface-container-lowest/85 backdrop-blur-3xl border border-outline-variant/30 rounded-3xl p-6 shadow-[0_32px_64px_rgba(0,0,0,0.12)] transform origin-bottom-right transition-all duration-300 scale-95 opacity-0" aria-labelledby="appearance-panel-title">
     
     <!-- Header -->
     <div class="mb-6 flex justify-between items-center">
-      <h3 class="font-headline font-extrabold text-xl text-on-surface tracking-tight">Appearance</h3>
+      <h3 id="appearance-panel-title" class="font-headline font-extrabold text-xl text-on-surface tracking-tight">Appearance</h3>
       <button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-colors group" id="appearance-close" aria-label="Close Settings">
         <span class="material-symbols-outlined text-[1.2rem] group-hover:rotate-90 transition-transform duration-300">close</span>
       </button>
@@ -16,9 +16,9 @@
     <div class="mb-6">
       <p class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant/80 font-bold mb-3 pl-1">Color Theme</p>
       <div class="bg-surface-container-low p-1 rounded-2xl flex gap-1 relative border border-outline-variant/20">
-        <button class="flex-1 py-2.5 rounded-xl text-on-surface text-sm font-semibold transition-all duration-200 z-10 data-[active=true]:bg-surface-container-lowest data-[active=true]:shadow-sm data-[active=true]:text-primary" data-theme-btn="light">Light</button>
-        <button class="flex-1 py-2.5 rounded-xl text-on-surface text-sm font-semibold transition-all duration-200 z-10 data-[active=true]:bg-surface-container-lowest data-[active=true]:shadow-sm data-[active=true]:text-primary" data-theme-btn="dark">Dark</button>
-        <button class="flex-1 py-2.5 rounded-xl text-on-surface text-sm font-semibold transition-all duration-200 z-10 data-[active=true]:bg-surface-container-lowest data-[active=true]:shadow-sm data-[active=true]:text-primary" data-theme-btn="system">Auto</button>
+        <button class="flex-1 py-2.5 rounded-xl text-on-surface text-sm font-semibold transition-all duration-200 z-10 data-[active=true]:bg-surface-container-lowest data-[active=true]:shadow-sm data-[active=true]:text-primary" data-theme-btn="light" aria-pressed="false">Light</button>
+        <button class="flex-1 py-2.5 rounded-xl text-on-surface text-sm font-semibold transition-all duration-200 z-10 data-[active=true]:bg-surface-container-lowest data-[active=true]:shadow-sm data-[active=true]:text-primary" data-theme-btn="dark" aria-pressed="false">Dark</button>
+        <button class="flex-1 py-2.5 rounded-xl text-on-surface text-sm font-semibold transition-all duration-200 z-10 data-[active=true]:bg-surface-container-lowest data-[active=true]:shadow-sm data-[active=true]:text-primary" data-theme-btn="system" aria-pressed="false">Auto</button>
       </div>
     </div>
 
@@ -26,13 +26,13 @@
     <div class="mb-6">
       <p class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant/80 font-bold mb-3 pl-1">Text Size</p>
       <div class="flex gap-2">
-        <button class="flex-1 py-3 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-on-surface flex flex-col items-center justify-center gap-1 hover:border-primary/30 hover:bg-surface transition-all data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-size-btn="small">
+        <button class="flex-1 py-3 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-on-surface flex flex-col items-center justify-center gap-1 hover:border-primary/30 hover:bg-surface transition-all data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-size-btn="small" aria-pressed="false">
           <span class="text-sm font-bold leading-none">A</span>
         </button>
-        <button class="flex-1 py-3 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-on-surface flex flex-col items-center justify-center gap-1 hover:border-primary/30 hover:bg-surface transition-all data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-size-btn="medium">
+        <button class="flex-1 py-3 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-on-surface flex flex-col items-center justify-center gap-1 hover:border-primary/30 hover:bg-surface transition-all data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-size-btn="medium" aria-pressed="false">
           <span class="text-lg font-bold leading-none">A</span>
         </button>
-        <button class="flex-1 py-3 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-on-surface flex flex-col items-center justify-center gap-1 hover:border-primary/30 hover:bg-surface transition-all data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-size-btn="large">
+        <button class="flex-1 py-3 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-on-surface flex flex-col items-center justify-center gap-1 hover:border-primary/30 hover:bg-surface transition-all data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-size-btn="large" aria-pressed="false">
           <span class="text-2xl font-bold leading-none">A</span>
         </button>
       </div>
@@ -42,17 +42,17 @@
     <div>
       <p class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant/80 font-bold mb-3 pl-1">Line Spacing</p>
       <div class="flex gap-2">
-        <button class="flex-1 h-12 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-current flex flex-col items-center justify-center gap-[3px] transform transition-all hover:border-primary/30 hover:bg-surface data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-space-btn="tight">
+        <button class="flex-1 h-12 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-current flex flex-col items-center justify-center gap-[3px] transform transition-all hover:border-primary/30 hover:bg-surface data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-space-btn="tight" aria-pressed="false">
           <div class="w-5 h-[2.5px] bg-current rounded-full opacity-70"></div>
           <div class="w-5 h-[2.5px] bg-current rounded-full opacity-70"></div>
           <div class="w-5 h-[2.5px] bg-current rounded-full opacity-70"></div>
         </button>
-        <button class="flex-1 h-12 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-current flex flex-col items-center justify-center gap-[5px] transform transition-all hover:border-primary/30 hover:bg-surface data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-space-btn="medium">
+        <button class="flex-1 h-12 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-current flex flex-col items-center justify-center gap-[5px] transform transition-all hover:border-primary/30 hover:bg-surface data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-space-btn="medium" aria-pressed="false">
           <div class="w-5 h-[2.5px] bg-current rounded-full opacity-80"></div>
           <div class="w-5 h-[2.5px] bg-current rounded-full opacity-80"></div>
           <div class="w-5 h-[2.5px] bg-current rounded-full opacity-80"></div>
         </button>
-        <button class="flex-1 h-12 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-current flex flex-col items-center justify-center gap-[7px] transform transition-all hover:border-primary/30 hover:bg-surface data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-space-btn="wide">
+        <button class="flex-1 h-12 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-current flex flex-col items-center justify-center gap-[7px] transform transition-all hover:border-primary/30 hover:bg-surface data-[active=true]:bg-primary-container/10 data-[active=true]:border-primary/50 data-[active=true]:text-primary data-[active=true]:shadow-sm" data-space-btn="wide" aria-pressed="false">
           <div class="w-5 h-[2.5px] bg-current rounded-full opacity-100"></div>
           <div class="w-5 h-[2.5px] bg-current rounded-full opacity-100"></div>
           <div class="w-5 h-[2.5px] bg-current rounded-full opacity-100"></div>
@@ -103,15 +103,21 @@
       isOpen = !isOpen;
       
       if (isOpen) {
+        panel.setAttribute('role', 'dialog');
+        panel.setAttribute('aria-modal', 'true');
         panel.classList.remove('hidden');
         // Add a slight delay so display:block paints before removing opacity
         requestAnimationFrame(() => {
           panel.classList.remove('scale-95', 'opacity-0');
           panel.classList.add('scale-100', 'opacity-100');
+          closeBtn.focus();
         });
       } else {
+        panel.removeAttribute('role');
+        panel.removeAttribute('aria-modal');
         panel.classList.remove('scale-100', 'opacity-100');
         panel.classList.add('scale-95', 'opacity-0');
+        fab.focus();
         setTimeout(() => {
           if (!isOpen) panel.classList.add('hidden');
         }, 300);
@@ -133,16 +139,34 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen) {
         togglePanel();
-        fab.focus();
+      }
+      if (e.key === 'Tab' && isOpen) {
+        const focusable = panel.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (!first || !last) return;
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
       }
     });
 
-    function updateActive(attr, val) {
-      root.querySelectorAll(`[${attr}]`).forEach(btn => {
+    function updateActive(attr: string, val: string) {
+      root!.querySelectorAll(`[${attr}]`).forEach(btn => {
         if(btn.getAttribute(attr) === val) {
           btn.setAttribute('data-active', 'true');
+          btn.setAttribute('aria-pressed', 'true');
         } else {
           btn.removeAttribute('data-active');
+          btn.setAttribute('aria-pressed', 'false');
         }
       });
     }
@@ -186,6 +210,7 @@
 
     // Read stored preferences to reflect correctly in the widget
     const storedPreferences = getStoredAppearanceSelection();
+    if (!root) return;
     
     updateActive('data-theme-btn', storedPreferences.theme);
     updateActive('data-size-btn', storedPreferences.size);

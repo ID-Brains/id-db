@@ -13,7 +13,7 @@ import AppearanceWidget from "../components/AppearanceWidget.astro";
     <div class="grid grid-cols-12 gap-8 relative z-10">
       <div class="col-span-12 lg:col-span-9 xl:col-span-8">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container text-on-primary-container text-xs font-label font-bold mb-6 border border-primary/20">
-          <span class="material-symbols-outlined text-sm" data-icon="hub">hub</span>
+          <span class="material-symbols-outlined text-sm" data-icon="hub" aria-hidden="true">hub</span>
           OPEN SOURCE KNOWLEDGE
         </div>
         <h1 class="font-headline text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tighter text-on-surface mb-8 leading-[1.05]">
@@ -30,14 +30,14 @@ import AppearanceWidget from "../components/AppearanceWidget.astro";
             class="bg-primary text-on-primary px-8 py-4 rounded-xl font-medium text-lg hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-95 flex items-center justify-center gap-3"
             href={`${import.meta.env.BASE_URL}/docs`}
           >
-            <span class="material-symbols-outlined" data-icon="search">search</span>
+            <span class="material-symbols-outlined" data-icon="search" aria-hidden="true">search</span>
             Explore the Archive
           </a>
           <a
             class="bg-surface-container border border-outline text-on-surface px-8 py-4 rounded-xl font-medium text-lg hover:bg-surface-container-high hover:border-outline-variant transition-all active:scale-95 flex items-center justify-center gap-3"
             href="https://github.com/ID-Brains/id-db/?tab=contributing-ov-file"
           >
-            <span class="material-symbols-outlined" data-icon="edit_document">edit_document</span>
+            <span class="material-symbols-outlined" data-icon="edit_document" aria-hidden="true">edit_document</span>
             Contribute Notes
           </a>
         </div>
@@ -48,13 +48,13 @@ import AppearanceWidget from "../components/AppearanceWidget.astro";
   <!-- Quote Section -->
   <section class="py-24 px-8 md:px-24 bg-surface-container-lowest border-y border-outline-variant/20">
     <div class="max-w-4xl mx-auto text-center">
-      <span class="material-symbols-outlined text-5xl text-primary/40 mb-6" data-icon="format_quote">format_quote</span>
+      <span class="material-symbols-outlined text-5xl text-primary/40 mb-6" data-icon="format_quote" aria-hidden="true">format_quote</span>
       <h2 class="font-headline text-3xl md:text-5xl font-medium leading-tight text-on-surface mb-8">
         "Knowledge is the only treasure that increases when shared."
       </h2>
       <a href="https://github.com/ID-Brains/id-db/blob/main/docs/PHILOSOPHY.md" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-primary font-label font-bold hover:underline underline-offset-4">
         Read our full philosophy
-        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward" aria-hidden="true">arrow_forward</span>
       </a>
     </div>
   </section>
@@ -74,7 +74,7 @@ import AppearanceWidget from "../components/AppearanceWidget.astro";
       <!-- Pillar 1 -->
       <div class="bg-surface-container-low rounded-3xl p-8 lg:p-10 border border-outline/10 hover:border-primary/30 transition-colors flex flex-col group">
         <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 group-hover:-translate-y-1 group-hover:scale-105 transition-all">
-          <span class="material-symbols-outlined text-3xl text-primary" data-icon="accessibility_new">accessibility_new</span>
+          <span class="material-symbols-outlined text-3xl text-primary" data-icon="accessibility_new" aria-hidden="true">accessibility_new</span>
         </div>
         <h3 class="font-headline text-2xl font-bold text-on-surface mb-4">Radical Accessibility</h3>
         <p class="text-on-surface-variant leading-relaxed flex-grow">
@@ -85,7 +85,7 @@ import AppearanceWidget from "../components/AppearanceWidget.astro";
       <!-- Pillar 2 -->
       <div class="bg-surface-container-low rounded-3xl p-8 lg:p-10 border border-outline/10 hover:border-primary/30 transition-colors flex flex-col group">
         <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 group-hover:-translate-y-1 group-hover:scale-105 transition-all">
-          <span class="material-symbols-outlined text-3xl text-primary" data-icon="school">school</span>
+          <span class="material-symbols-outlined text-3xl text-primary" data-icon="school" aria-hidden="true">school</span>
         </div>
         <h3 class="font-headline text-2xl font-bold text-on-surface mb-4">Open-Source Education</h3>
         <p class="text-on-surface-variant leading-relaxed flex-grow">
@@ -96,7 +96,7 @@ import AppearanceWidget from "../components/AppearanceWidget.astro";
       <!-- Pillar 3 -->
       <div class="bg-surface-container-low rounded-3xl p-8 lg:p-10 border border-outline/10 hover:border-primary/30 transition-colors flex flex-col group">
         <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 group-hover:-translate-y-1 group-hover:scale-105 transition-all">
-          <span class="material-symbols-outlined text-3xl text-primary" data-icon="psychology">psychology</span>
+          <span class="material-symbols-outlined text-3xl text-primary" data-icon="psychology" aria-hidden="true">psychology</span>
         </div>
         <h3 class="font-headline text-2xl font-bold text-on-surface mb-4">Popperian Refinement</h3>
         <p class="text-on-surface-variant leading-relaxed flex-grow">
@@ -107,7 +107,7 @@ import AppearanceWidget from "../components/AppearanceWidget.astro";
       <!-- Pillar 4 -->
       <div class="bg-surface-container-low rounded-3xl p-8 lg:p-10 border border-outline/10 hover:border-primary/30 transition-colors flex flex-col group lg:col-span-2">
         <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 group-hover:-translate-y-1 group-hover:scale-105 transition-all">
-          <span class="material-symbols-outlined text-3xl text-primary" data-icon="forest">forest</span>
+          <span class="material-symbols-outlined text-3xl text-primary" data-icon="forest" aria-hidden="true">forest</span>
         </div>
         <h3 class="font-headline text-2xl font-bold text-on-surface mb-4">Zero-Cost Sustainability</h3>
         <p class="text-on-surface-variant leading-relaxed flex-grow max-w-3xl">
@@ -118,7 +118,7 @@ import AppearanceWidget from "../components/AppearanceWidget.astro";
       <!-- Pillar 5 -->
       <div class="bg-surface-container-low rounded-3xl p-8 lg:p-10 border border-outline/10 hover:border-primary/30 transition-colors flex flex-col group">
         <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 group-hover:-translate-y-1 group-hover:scale-105 transition-all">
-          <span class="material-symbols-outlined text-3xl text-primary" data-icon="data_object">data_object</span>
+          <span class="material-symbols-outlined text-3xl text-primary" data-icon="data_object" aria-hidden="true">data_object</span>
         </div>
         <h3 class="font-headline text-2xl font-bold text-on-surface mb-4">Content Over Container</h3>
         <p class="text-on-surface-variant leading-relaxed flex-grow">
@@ -199,7 +199,7 @@ import AppearanceWidget from "../components/AppearanceWidget.astro";
     <div class="flex flex-col sm:flex-row gap-4 relative z-10">
       <a class="bg-primary text-on-primary px-10 py-5 rounded-xl font-bold tracking-tight hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center gap-2" href={`${import.meta.env.BASE_URL}/docs`}>
         Access the Database
-        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+        <span class="material-symbols-outlined" data-icon="arrow_forward" aria-hidden="true">arrow_forward</span>
       </a>
       <a class="bg-surface-container border border-outline text-on-surface px-10 py-5 rounded-xl font-bold tracking-tight hover:bg-surface-container-highest transition-all flex items-center gap-2" href="https://github.com/ID-Brains/id-db/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">
         Learn How to Contribute

@@ -4,15 +4,15 @@ This document provides technical instructions for formatting and organizing cont
 
 ## 1. Directory Structure
 
-All content is stored in `/src/content/docs/`. Organise files by academic level and subject:
+All content lives under `src/content/docs/docs/` (the outer `docs/` is the Starlight content collection root; the inner `docs/` produces the `/docs/` URL prefix). Organise files by academic level and subject:
 
 ```
-/src/content
-  /docs
-    /level-1
-      /term-1
-        /subject-slug
-          /type (e.g., slides, summaries, exams)
+src/content/docs/
+  docs/                    ← this produces /docs/ in the URL
+    level-1/
+      term-1/
+        subject-slug/
+          type/            (e.g., summaries, slides, exams)
             file-slug.md
 ```
 
@@ -29,11 +29,11 @@ Every Markdown file must start with a YAML frontmatter block. This metadata is s
 ---
 title: "ملخص محاضرة المعالجات 1"
 date: "2026-04-11"            # ISO 8601 (YYYY-MM-DD)
-type: "summary"               # Options: summary | quiz | notes | reference
+description: "A concise summary of Lecture 1 on microprocessors."
+type: "summary"               # Optional. Options: summary | quiz | notes | reference
 subject: "microprocessors"    # Must match parent directory name
 level: 3                       # 1-5
 term: 1                       # 1 or 2
-prof: "د. أحمد علي"           # Professor's name
 contributor: "github_username" # Your GitHub username
 tags: ["CSE", "Microprocessors"] # At least one required
 language: "ar"                # "ar" or "en"

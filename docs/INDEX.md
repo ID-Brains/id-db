@@ -1,6 +1,6 @@
 # Welcome to the project-hikma
 
-Welcome to the **project-hikma** (idbrains-db project)! This is a community-driven, open-source project dedicated to making academic knowledge accessible and collaborative for all students.
+Welcome to the **project-hikma** (id-db)! This is a community-driven, open-source project dedicated to making academic knowledge accessible and collaborative for all students.
 
 Whether you're here to learn, contribute, or maintain, this documentation will guide you through our mission and how to get involved.
 

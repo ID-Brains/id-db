@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import starlightGiscus from 'starlight-giscus';
 import { starlightKatex } from 'starlight-katex';
 
-const tailwindPlugin = /** @type {any} */ (tailwindcss());
+const tailwindPlugin = tailwindcss();
 const SITE = 'https://ID-Brains.github.io/';
 const BASE = '/id-db/';
 
@@ -13,14 +13,9 @@ const BASE = '/id-db/';
 export default defineConfig({
 	site: SITE,
 	base: BASE,
-	vite: /** @type {any} */ ({
-		resolve: /** @type {any} */ ({
-			tsconfigPaths: true,
-		}),
+	vite: {
 		plugins: [tailwindPlugin],
-		globs: ['src/**/*.js'],
-		exclude: ['node_modules'],
-	}),
+	},
 	integrations: [
 		starlight({
 			title: 'project-hikma',
@@ -41,7 +36,7 @@ export default defineConfig({
 			},
 			plugins: [
 				starlightKatex(),
-				starlightGiscus(/** @type {any} */ ({
+				starlightGiscus({
 					repo: 'ID-Brains/id-db',
 					repoId: 'R_kgDOR9twsg',
 					category: 'Q&A',
@@ -52,7 +47,7 @@ export default defineConfig({
 					theme: 'preferred_color_scheme',
 					lang: 'en',
 					lazy: true,
-				})),
+				}),
 			],
 
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/ID-Brains/id-db' }],

@@ -1,7 +1,7 @@
 ---
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 
-const { entry } = Astro.locals.starlightRoute;
+const { entry } = (Astro.locals as Record<string, any>).starlightRoute;
 const { tags , isAiGenerated } = entry.data;
 
 // Time counting based on 200 words per minute reading speed 
@@ -12,7 +12,8 @@ const readingTime = Math.max(1, Math.ceil(words / 200));
 
 {isAiGenerated && (
   <div class="ai-badge">
-    <span>✨ AI Generated</span>
+    <span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>
+    <span>AI Generated</span>
   </div>
 )}
 
@@ -25,10 +26,9 @@ const readingTime = Math.max(1, Math.ceil(words / 200));
 )}
 
   <span class="reading-time">
-    ⏱️ Reading Time: {readingTime} {readingTime === 1 ? 'minute' : 'minutes'}
+    <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+    Reading Time: {readingTime} {readingTime === 1 ? 'minute' : 'minutes'}
   </span>
-</div>
-
 <Default />
 
 <style>

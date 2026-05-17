@@ -1,9 +1,9 @@
 declare module 'virtual:starlight/user-config' {
-	const config: any;
+	const config: Record<string, unknown>;
 	export default config;
 }
 
 declare module 'virtual:starlight/components/*' {
-	const Component: any;
+	const Component: (...args: unknown[]) => unknown;
 	export default Component;
 }

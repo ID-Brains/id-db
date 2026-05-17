@@ -11,8 +11,9 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 	? import.meta.env.BASE_URL.slice(0, -1)
 	: import.meta.env.BASE_URL;
 
+const components = (config.components as Record<string, string> | undefined) ?? {};
 const shouldRenderSearch =
-	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+	config.pagefind || components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
 <header class="my-header">
@@ -28,7 +29,7 @@ const shouldRenderSearch =
 		</div>
 
 		<div class="my-actions">
-			{shouldRenderSearch && <Search class="my-search" />}
+			{shouldRenderSearch && <div class="my-search"><Search /></div>}
 			<div class="my-desktop-only"><SocialIcons /></div>
 			<div class="my-desktop-only"><ThemeSelect /></div>
 			<div class="my-desktop-only"><LanguageSelect /></div>

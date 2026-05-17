@@ -18,7 +18,7 @@ VALID_TYPES = {"summary", "quiz", "notes", "reference"}
 class Schema(BaseModel):
     title: str = Field(min_length=1)
     date: date
-    type: Literal["summary", "quiz", "notes", "reference"]
+    type: Literal["summary", "quiz", "notes", "reference"] | None = None
     subject: str = Field(min_length=1)
     level: int
     term: int
@@ -79,22 +79,6 @@ class Schema(BaseModel):
             if not stripped:
                 raise ValueError("tags must be non-empty strings")
             normalized.append(stripped)
-        return normalized
-
-    @field_validator("language")
-    @classmethod
-    def _normalize_language(cls, value: str) -> str:
-        normalized = value.strip().lower()
-        if normalized not in VALID_LANGUAGES:
-            raise ValueError("language must be 'ar' or 'en'")
-        return normalized
-
-    @field_validator("type")
-    @classmethod
-    def _check_type(cls, value: str) -> str:
-        normalized = value.strip().lower()
-        if normalized not in VALID_TYPES:
-            raise ValueError("type must be summary, quiz, notes, or reference")
         return normalized
 
 

@@ -16,7 +16,7 @@ Best for students who are not familiar with Git or Markdown.
 - **Location:** Visit `/contribute` on our live site.
 - **Process:** Authenticate with your GitHub account, fill in the fields, and upload your file or text.
 - **What happens:** Our system will automatically create a Pull Request on your behalf.
-- **Beaware** That every user will get max 2-4 usages of this method as it condracts of the aim of this project but it will be a good entry for newbies
+- **Note:** Each user will be limited to 2-4 uses of this method, as it contradicts the educational aim of the project, but it serves as a good entry point for newcomers.
 
 ### 2. Direct Pull Request
 Best for those who want more control over their contributions.
@@ -27,11 +27,21 @@ Best for those who want more control over their contributions.
   3. Add your Markdown file to the correct directory (see [Content Guidelines](./docs/CONTENT_GUIDELINES.md)).
   4. Submit a Pull Request (PR) to the `main` branch.
 
+## 🛠 Development Setup
+
+To run the project locally:
+
+1. **Prerequisites:** Node.js >= 18, npm
+2. **Install dependencies:** `npm install`
+3. **Start dev server:** `npm run dev`
+4. **Build for production:** `npm run build`
+5. **Run validation locally:** `pip install -r src/plugins/requirements.txt && python src/plugins/validation.py src/content/docs/path/to/file.md`
+
 ## 📝 Pull Request Guidelines
 
 To ensure a smooth review process, please follow these conventions:
 
-- **PR Title:** `[level-term] Subject: Short Description`
+- **PR Title:** `[L{level}-T{term}] Subject: Short Description`
   Example: `[L3-T1] Microprocessors: Lecture 01 Summary`
 - **Validation:** Ensure the automated checks pass. If they fail, review the error logs or ask a maintainer for help.
 

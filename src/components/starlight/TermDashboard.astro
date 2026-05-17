@@ -43,12 +43,10 @@ const subjectList = Array.from(grouped.keys()).sort((a, b) => a.localeCompare(b)
         <CardGrid>
             {subjectList.map((subjName) => {
                 const docsForSubject = grouped.get(subjName)!;
-                const firstDoc = docsForSubject[0];
+                if (docsForSubject.length === 0) return null;
+                const firstDoc = docsForSubject[0]!;
                 const href = `${import.meta.env.BASE_URL}/docs/${firstDoc.id.replace(/^docs\//, "")}/`;
                 const count = docsForSubject.length;
-                const isAi = docsForSubject.some(
-                    (doc) => (doc.data as { isAiGenerated?: boolean }).isAiGenerated === true,
-                );
 
                 return (
                     <LinkCard

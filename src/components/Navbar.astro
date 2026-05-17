@@ -44,13 +44,13 @@ const isTests = pathname === `${base}/tests` || pathname === `${base}/tests/`;
     <div class="flex flex-col gap-3">
       <p class="font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-2 pl-2">Navigation</p>
       <a class={`flex items-center gap-3 rounded-2xl px-4 py-3.5 transition-colors ${isHome ? 'bg-primary/10 text-primary font-bold' : 'text-on-surface hover:bg-surface-container hover:text-primary'}`} href={`${base}/`} data-nav-link>
-        <span class="material-symbols-outlined text-[1.2rem]">home</span> Home
+        <span class="material-symbols-outlined text-[1.2rem]" aria-hidden="true">home</span> Home
       </a>
       <a class={`flex items-center gap-3 rounded-2xl px-4 py-3.5 transition-colors ${isDocs ? 'bg-primary/10 text-primary font-bold' : 'text-on-surface hover:bg-surface-container hover:text-primary'}`} href={`${base}/docs`} data-nav-link>
-        <span class="material-symbols-outlined text-[1.2rem]">menu_book</span> Docs
+        <span class="material-symbols-outlined text-[1.2rem]" aria-hidden="true">menu_book</span> Docs
       </a>
       <a class={`flex items-center gap-3 rounded-2xl px-4 py-3.5 transition-colors ${isTests ? 'bg-primary/10 text-primary font-bold' : 'text-on-surface hover:bg-surface-container hover:text-primary'}`} href={`${base}/tests`} data-nav-link>
-        <span class="material-symbols-outlined text-[1.2rem]">quiz</span> Tests
+        <span class="material-symbols-outlined text-[1.2rem]" aria-hidden="true">quiz</span> Tests
       </a>
     </div>
   </div>
